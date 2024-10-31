@@ -1,4 +1,6 @@
 <?php
+if (!defined('ABSPATH')) exit;
+
 return sprintf(
     '<div class="notice notice-%s%s"><p>%s</p></div>',
     $this->getSeverity(),

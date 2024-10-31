@@ -5,11 +5,18 @@ use ITRechtKanzlei\LegalTextsConnector\Plugin;
 use ITRechtKanzlei\LegalTextsConnector\SettingsPage;
 use ITRechtKanzlei\LegalTextsConnector\ShortCodes;
 
+if (!defined('ABSPATH')) exit;
+
+$tm = !empty(Plugin::getTrinityBrand());
+
+?>
+<div class="document-list">
+<?php
 foreach (ShortCodes::settings() as $tag => $sc) {
     $documents = Plugin::getAvailableDocuments($sc['setting_key']);
     ?>
     <div class="itrk-card itrk-document">
-        <h4><?php echo esc_html($sc['name']); ?></h4>
+        <h2><?php echo esc_html($sc['name']); ?></h2>
     <?php
     if (empty($documents)) {
     ?>
@@ -19,7 +26,7 @@ foreach (ShortCodes::settings() as $tag => $sc) {
         >
             <span><?php esc_html_e('There is no document available for this type yet.', 'legal-texts-connector-it-recht-kanzlei'); ?></span>
             <button type="submit" name="redirect" class="itrk-button-link"><?php esc_html_e('Set up now.', 'legal-texts-connector-it-recht-kanzlei'); ?><span class="dashicons dashicons-external"></span></button>
-            <input type="hidden" name="sessionName" value="<?php echo esc_attr($session['itrk_session_name']); ?>">
+            <input type="hidden" name="sessionName" value="<?php esc_attr($session['itrk_session_name']); ?>">
             <input type="hidden" name="sessionId" value="<?php echo esc_attr($session['itrk_session_id']); ?>">
             <input type="hidden" name="sid" value="<?php echo esc_attr(get_option(Plugin::OPTION_SID)); ?>">
             <input type="hidden" name="targetPage" value="<?php echo esc_attr(sprintf(Plugin::TARGET_PAGE, get_option(Plugin::OPTION_INTERFACE_ID))); ?>">
@@ -32,7 +39,7 @@ foreach (ShortCodes::settings() as $tag => $sc) {
         <div class="itrk-grid-row">
             <div class="itrk-grid-hl"><?php esc_html_e('Country', 'legal-texts-connector-it-recht-kanzlei'); ?></div>
             <div class="itrk-grid-hl"><?php esc_html_e('Language', 'legal-texts-connector-it-recht-kanzlei'); ?></div>
-            <div class="itrk-grid-hl">
+            <?php if (!$tm) { ?><div class="itrk-grid-hl">
                 <span><?php esc_html_e('Shortcode', 'legal-texts-connector-it-recht-kanzlei'); ?></span>
                 <div class="itrk-tooltip">
                     <div class="dashicons dashicons-info-outline"></div>
@@ -41,6 +48,7 @@ foreach (ShortCodes::settings() as $tag => $sc) {
                     </div>
                 </div>
             </div>
+            <?php } ?>
             <div class="itrk-grid-hl"><?php esc_html_e('Last transmission', 'legal-texts-connector-it-recht-kanzlei'); ?></div>
         </div>
         <div class="itrk-divider"></div>
@@ -71,12 +79,12 @@ foreach (ShortCodes::settings() as $tag => $sc) {
             continue;
         }
 
-        $shortcode = ShortCodes::createShortCode($sc['setting_key'], $document->getLanguage(), $document->getCountry());
+        $shortcode = $document->getShortCode();
         ?>
             <div class="itrk-grid-row itrk-document-row">
                 <div><?php echo esc_html($document->getCountryName()); ?></div>
                 <div><?php echo esc_html($document->getLanguageName()); ?></div>
-                <div class="itrk-shortcode">
+                <?php if (!$tm) { ?><div class="itrk-shortcode">
                     <?php if (!ShortCodes::isShortcodeUsed($shortcode)) { ?>
                         <i class="itrk-shortcode-not-used" title="<?php esc_html_e('This shortcode is currently not in use.', 'legal-texts-connector-it-recht-kanzlei'); ?>"></i>
                     <?php } ?>
@@ -84,21 +92,21 @@ foreach (ShortCodes::settings() as $tag => $sc) {
                     <a class="dashicons dashicons-admin-page" title="<?php esc_html_e('Copy shortcode', 'legal-texts-connector-it-recht-kanzlei'); ?>"></a>
 
                     <?php if (!ShortCodes::isShortcodeUsed($shortcode)) { ?>
-                        <form class="itrk-inline-form" method="post" action="<?= esc_url(add_query_arg([ 'page' => SettingsPage::PAGE_SETTINGS], admin_url('options-general.php'))); ?>">
-                            <input type="hidden" name="document_id" value="<?= esc_html($k); ?>">
-                            <button type="submit" class="itrk-button-link" title="<?=esc_attr__('Delete document', 'legal-texts-connector-it-recht-kanzlei');?>"><span class="dashicons dashicons-trash"></span></button>
+                        <form class="itrk-inline-form" method="post" action="<?php echo esc_url(add_query_arg([ 'page' => SettingsPage::PAGE_SETTINGS], admin_url('options-general.php'))); ?>">
+                            <input type="hidden" name="document_id" value="<?php echo esc_html($k); ?>">
+                            <button type="submit" class="itrk-button-link" title="<?php esc_attr_e('Delete document', 'legal-texts-connector-it-recht-kanzlei');?>"><span class="dashicons dashicons-trash"></span></button>
                         </form>
-                        <span class="itrk-inactive dashicons dashicons-welcome-view-site" title="<?= esc_attr__('View Page (Shortcode not in use yet)', 'legal-texts-connector-it-recht-kanzlei'); ?>"></span>
+                        <span class="itrk-inactive dashicons dashicons-welcome-view-site" title="<?php esc_attr_e('View Page (Shortcode not in use yet)', 'legal-texts-connector-it-recht-kanzlei'); ?>"></span>
                     <?php } else { ?>
-                        <span class="itrk-inactive dashicons dashicons-trash" title="<?=esc_attr__('Delete document (still in use)', 'legal-texts-connector-it-recht-kanzlei');?>"></span>
-                        <a class="dashicons dashicons-welcome-view-site" title="<?= esc_attr__('View Page', 'legal-texts-connector-it-recht-kanzlei'); ?>" href="<?php esc_url(ShortCodes::getPageLinkShortCode($shortcode)); ?>"></a>
+                        <span class="itrk-inactive dashicons dashicons-trash" title="<?php esc_attr_e('Delete document (still in use)', 'legal-texts-connector-it-recht-kanzlei');?>"></span>
+                        <a class="dashicons dashicons-welcome-view-site" title="<?php esc_attr_e('View Page', 'legal-texts-connector-it-recht-kanzlei'); ?>" href="<?php esc_url(ShortCodes::getPageLinkShortCode($shortcode)); ?>"></a>
                     <?php } ?>
-                </div>
+                </div><?php } ?>
                 <div><?php
                     $seconds = time() - $document->getCreationDate()->getTimestamp();
                     $minutes = (int)($seconds / 60);
                     if ($seconds <= 5) {
-                        echo '<b style="color: var(--secondary-color)">'.esc_html(__('Now', 'legal-texts-connector-it-recht-kanzlei')).'</b>';
+                        echo '<strong>'.esc_html(__('Now', 'legal-texts-connector-it-recht-kanzlei')).'</strong>';
                     } elseif ($seconds < 60) {
                         // translators: %d will be replaced with the number of seconds
                         echo esc_html(sprintf(__('%d seconds ago', 'legal-texts-connector-it-recht-kanzlei'), $seconds));
@@ -109,17 +117,11 @@ foreach (ShortCodes::settings() as $tag => $sc) {
                         echo esc_html(sprintf(__('%d minutes ago', 'legal-texts-connector-it-recht-kanzlei'), $minutes));
                     } else {
                         // translators: A date time format compliant to https://www.php.net/manual/datetime.format.php
-                        echo $document->getCreationDate()->format(__('M d, Y \a\t g:i a', 'legal-texts-connector-it-recht-kanzlei'));
+                        echo esc_html($document->getCreationDate()->format(__('M d, Y \a\t g:i a', 'legal-texts-connector-it-recht-kanzlei')));
                     }
                 ?></div>
             </div>
         <?php } ?>
     </div>
 <?php } ?>
-<script>
-jQuery(function ($) {
-    $('.dashicons-admin-page').click(function () {
-        navigator.clipboard.writeText($(this).parent().find('code').text());
-    });
-});
-</script>
+</div>

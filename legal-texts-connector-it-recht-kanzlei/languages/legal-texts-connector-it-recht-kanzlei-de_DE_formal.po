@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Plugins - Legal Texts Connector IT-Recht Kanzlei\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/legal-texts-"
 "connector-it-recht-kanzlei\n"
-"POT-Creation-Date: 2023-11-18T16:04:23+01:00\n"
-"PO-Revision-Date: 2023-11-18 16:07+0100\n"
+"POT-Creation-Date: 2024-10-29T01:03:25+01:00\n"
+"PO-Revision-Date: 2024-10-29 01:04+0100\n"
 "Last-Translator: \n"
 "Language-Team: IT-Recht Kanzlei <info@it-recht-kanzlei.de>\n"
 "Language: de\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Domain: legal-texts-connector-it-recht-kanzlei\n"
 
 #. Plugin Name of the plugin
@@ -33,13 +33,11 @@ msgstr ""
 
 #. Description of the plugin
 msgid ""
-"Ensures your website is always up-to-date with legal texts from the IT law "
-"firm that are safe from legal notices after booking the GTC service and a "
-"one-time setup."
+"Ensures that your website is always provided with warning-proof legal texts "
+"from IT-Recht Kanzlei after booking the GTC service."
 msgstr ""
 "Sichert deinen Internetauftritt mit stets aktuellen und abmahnsicheren "
-"Rechtstexten der IT-Recht Kanzlei nach Buchung des AGB-Service und einer "
-"einmaligen Einrichtung ab."
+"Rechtstexten der IT-Recht Kanzlei nach Buchung des AGB-Service ab."
 
 #. Author of the plugin
 msgid "IT-Recht Kanzlei"
@@ -57,188 +55,184 @@ msgstr ""
 "WP_Filesystem kann nicht initialisiert werden. Bitte stellen Sie sicher, "
 "dass in das Dateisystem geschrieben werden kann."
 
-#. translators: first %s is the method, second %s is a list of error messages.
-#: src/Helper.php:36
-msgid "WP_Filesystem (%1$s) encounterd errors during the initialization: %2$s"
+#. translators: %2$s will be replaced with a list of error messages.
+#: src/Helper.php:38
+msgid "WP_Filesystem (%1$s) encountered errors during the initialization: %2$s"
 msgstr ""
 "Während der Initialisierung von WP_Filesystem (%1$s) sind Fehler "
 "aufgetreten: %2$s"
 
-#: src/Install.php:188
-msgid "Error saving updated post!"
-msgstr "Fehler beim Speichern des aktualisierten Beitrags!"
-
-#: src/ItrkLtiHandler.php:72
+#: src/ItrkLtiHandler.php:77
 msgid "The legal text could not be stored in the database."
 msgstr "Der Rechtstext konnte nicht aktualisiert werden."
 
-#: src/ItrkLtiHandler.php:94
+#: src/ItrkLtiHandler.php:99
 msgid "Unable to create the directory for storing the pdf documents."
 msgstr ""
 "Das Verzeichnis für die Ablage der PDF-Dokumente kann nicht erstellt werden."
 
-#: src/ItrkLtiHandler.php:103
+#: src/ItrkLtiHandler.php:108
 msgid "The file could not be written."
 msgstr "Die Datei konnte nicht geschrieben werden."
 
-#: src/ItrkLtiHandler.php:109
+#: src/ItrkLtiHandler.php:114
 msgid "The pdf document could not be saved."
 msgstr "Das PDF konnte nicht gespeichert werden."
 
 #. translators: %s will be replaced with an error message.
-#: src/ItrkLtiHandler.php:111
+#: src/ItrkLtiHandler.php:116
 msgid "Reason: %s"
 msgstr "Grund: %s"
 
-#: src/Plugin.php:83
+#: src/Plugin.php:98
 msgid "German"
 msgstr "Deutsch"
 
-#: src/Plugin.php:84
+#: src/Plugin.php:99
 msgid "French"
 msgstr "Französisch"
 
-#: src/Plugin.php:85
+#: src/Plugin.php:100
 msgid "English"
 msgstr "Englisch"
 
-#: src/Plugin.php:86
+#: src/Plugin.php:101
 msgid "Spanish"
 msgstr "Spanisch"
 
-#: src/Plugin.php:87
+#: src/Plugin.php:102
 msgid "Italian"
 msgstr "Italienisch"
 
-#: src/Plugin.php:88
+#: src/Plugin.php:103
 msgid "Dutch"
 msgstr "Niederländisch"
 
-#: src/Plugin.php:89
+#: src/Plugin.php:104
 msgid "Polish"
 msgstr "Polnisch"
 
-#: src/Plugin.php:90
+#: src/Plugin.php:105
 msgid "Swedish"
 msgstr "Schwedisch"
 
-#: src/Plugin.php:91
+#: src/Plugin.php:106
 msgid "Danish"
 msgstr "Dänisch"
 
-#: src/Plugin.php:92
+#: src/Plugin.php:107
 msgid "Czech"
 msgstr "Tschechien"
 
-#: src/Plugin.php:93
+#: src/Plugin.php:108
 msgid "Slovenian"
 msgstr "Slovenisch"
 
-#: src/Plugin.php:94
+#: src/Plugin.php:109
 msgid "Portuguese"
 msgstr "Portugisisch"
 
-#: src/Plugin.php:95
+#: src/Plugin.php:110
 msgid "Norwegian"
 msgstr "Norwegisch"
 
-#: src/Plugin.php:96
+#: src/Plugin.php:111
 msgid "Turkish"
 msgstr "Türkisch"
 
-#: src/Plugin.php:107
+#: src/Plugin.php:122
 msgid "Germany"
 msgstr "Deutschland"
 
-#: src/Plugin.php:108
+#: src/Plugin.php:123
 msgid "Austria"
 msgstr "Österreich"
 
-#: src/Plugin.php:109
+#: src/Plugin.php:124
 msgid "Switzerland"
 msgstr "Schweiz"
 
-#: src/Plugin.php:110
+#: src/Plugin.php:125
 msgid "Sweden"
 msgstr "Schweden"
 
-#: src/Plugin.php:111
+#: src/Plugin.php:126
 msgid "Spain"
 msgstr "Spanien"
 
-#: src/Plugin.php:112
+#: src/Plugin.php:127
 msgid "Italy"
 msgstr "Italien"
 
-#: src/Plugin.php:113
+#: src/Plugin.php:128
 msgid "Poland"
 msgstr "Polen"
 
-#: src/Plugin.php:114
+#: src/Plugin.php:129
 msgid "England"
 msgstr "England"
 
-#: src/Plugin.php:115
+#: src/Plugin.php:130
 msgid "France"
 msgstr "Frankreich"
 
-#: src/Plugin.php:116
+#: src/Plugin.php:131
 msgid "Belgium"
 msgstr "Belgien"
 
-#: src/Plugin.php:117
+#: src/Plugin.php:132
 msgid "Netherlands"
 msgstr "Niederlande"
 
-#: src/Plugin.php:118
+#: src/Plugin.php:133
 msgid "USA"
 msgstr "USA"
 
-#: src/Plugin.php:119
+#: src/Plugin.php:134
 msgid "Canada"
 msgstr "Kanada"
 
-#: src/Plugin.php:120
+#: src/Plugin.php:135
 msgid "Ireland"
 msgstr "Irland"
 
-#: src/Plugin.php:121
+#: src/Plugin.php:136
 msgid "Czech Republic"
 msgstr "Tschechische Republik"
 
-#: src/Plugin.php:122
+#: src/Plugin.php:137
 msgid "Denmark"
 msgstr "Dänemark"
 
-#: src/Plugin.php:123
+#: src/Plugin.php:138
 msgid "Luxembourg"
 msgstr "Luxenburg"
 
-#: src/Plugin.php:124
+#: src/Plugin.php:139
 msgid "Slovenia"
 msgstr "Slovenien"
 
-#: src/Plugin.php:125
+#: src/Plugin.php:140
 msgid "Australia"
 msgstr "Australien"
 
-#: src/Plugin.php:126
+#: src/Plugin.php:141
 msgid "Portugal"
 msgstr "Portugal"
 
-#: src/Plugin.php:137
+#: src/Plugin.php:153
 msgid "Terms and Conditions"
 msgstr "Allgemeine Geschäftsbedingungen (AGB)"
 
-#: src/Plugin.php:138
+#: src/Plugin.php:154
 msgid "Privacy"
 msgstr "Datenschutzerklärung"
 
-#: src/Plugin.php:139
+#: src/Plugin.php:155
 msgid "Refund Policy"
 msgstr "Widerrufsbelehrung"
 
-#: src/Plugin.php:140
+#: src/Plugin.php:156
 msgid "Imprint"
 msgstr "Impressum"
 
@@ -246,46 +240,52 @@ msgstr "Impressum"
 msgid "Legal Texts Connector of the IT-Recht Kanzlei"
 msgstr "Rechtstexte-Schnittstelle der IT-Recht Kanzlei"
 
-#: src/SettingsPage.php:42
-msgid "The old T&C Connector has been deleted successfully."
-msgstr "Der alte AGB Connector wurde erfolgreich deinstalliert."
-
-#: src/SettingsPage.php:52
-msgid ""
-"Please note that the old T&C Connector and this plugin cannot be used "
-"together, as conflicts may occur. If you uninstall this plugin and "
-"reactivate the old T&C Connector, you will have to set it up again."
-msgstr ""
-"Bitte beachten Sie, dass der alte AGB-Connector und dieses Plugin nicht "
-"zusammen verwendet werden können, da es zu Konflikten kommen kann. Sollten "
-"Sie dieses Plugin deinstallieren und den alten AGB-Connector reaktivieren "
-"müssen Sie diesen neu einrichten."
-
-#: src/SettingsPage.php:64
-msgid ""
-"We have found settings of the old T&C Connector plugin and successfully "
-"transferred them to this plugin. The old plugin has been deactivated. Please "
-"check whether all desired legal texts are correctly integrated. If "
-"necessary, transfer the texts from the client portal again. Please note that "
-"errors may occur when reactivating the old plugin."
-msgstr ""
-"Wir haben Einstellungen des alten AGB Connector Plugins gefunden und auf "
-"dieses Plugin erfolgreich übertragen. Das alte Plugin wurde deaktiviert. "
-"Bitte Kontrollieren Sie, ob alle gewünschten Rechtstexte korrekt eingebunden "
-"werden. Übertragen Sie, falls nötig, die Texte erneut aus dem "
-"Mandantenportal. Beachten Sie, dass es bei der Reaktivierung des alten "
-"Plugins zu Fehlern kommen kann."
-
-#: src/SettingsPage.php:82
+#: src/SettingsPage.php:40
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: src/SettingsPage.php:87
+#: src/SettingsPage.php:45
 msgid "Reset Settings"
 msgstr "Einstellungen zurücksetzen"
 
+#: src/SettingsPage.php:155
+msgid "An unknown error occurred."
+msgstr "Ein unbekannter Fehler ist aufgetreten."
+
+#: src/SettingsPage.php:156
+msgid ""
+"A connection to the server of IT-Recht Kanzlei could not be established. "
+"Error Details:"
+msgstr ""
+"Es konnte keine Verbindung zum Server der IT-Recht Kanzlei hergestellt "
+"werden. Fehler-Details:"
+
+#: src/SettingsPage.php:157
+msgid "Your provided credentials are incomplete."
+msgstr "Die von Ihnen angegebenen Zugangsdaten sind unvollständig."
+
+#: src/SettingsPage.php:158
+msgid "Your provided credentials are invalid."
+msgstr "Die von Ihnen angegebenen Zugangsdaten sind ungültig."
+
+#: src/SettingsPage.php:159
+msgid ""
+"You do not have any imprints configured. Please log into the Client Portal "
+"of IT-Recht Kanzlei."
+msgstr ""
+"Sie haben noch keine Impressen eingerichtet. Bitte loggen Sie sich in das "
+"Mandantenportal der IT-Recht Kanzlei ein."
+
+#: src/SettingsPage.php:160
+msgid ""
+"The selected imprint is not active anymore. Please reload the page and "
+"repeat the process."
+msgstr ""
+"Das ausgewählte Impressum ist nicht mehr aktiv. Bitte laden Sie die Seite "
+"neu und wiederholen Sie den Vorgang."
+
 #. translators: %4$s will be replaced with the language name the document is for.
-#: src/SettingsPage.php:200
+#: src/SettingsPage.php:201
 msgid ""
 "The document %1$s \"%2$s\" for the country %3$s in the language %4$s has "
 "been deleted."
@@ -293,7 +293,7 @@ msgstr ""
 "Das Dokument %1$s „%2$s“ für das Land %3$s in der Sprache %4$s wurde "
 "gelöscht."
 
-#: src/ShortCodes.php:82
+#: src/ShortCodes.php:80
 msgid ""
 "Please use the copy function to the right of the shortcodes in the plugin "
 "and paste it here. Make sure you select the correct language."
@@ -302,48 +302,12 @@ msgstr ""
 "und fügen Sie diesen hier ein. Achten Sie auf die korrekte Sprachauswahl."
 
 #. translators: %s will be replaced with the short code name.
-#: src/ShortCodes.php:98
+#: src/ShortCodes.php:96
 msgid "No content found for %s. Please transfer the legal texts again."
 msgstr ""
 "Kein Inhalt gefunden für %s. Bitte übertragen Sie die Rechtstexte erneut."
 
-#: src/views/login.php:8
-msgid "An unknown error occured."
-msgstr "Ein unbekannter Fehler ist aufgetreten."
-
-#: src/views/login.php:9
-msgid ""
-"A connection to the server of IT-Recht Kanzlei could not be established. "
-"Error Details:"
-msgstr ""
-"Es konnte keine Verbindung zum Server der IT-Recht Kanzlei hergestellt "
-"werden. Fehler-Details:"
-
-#: src/views/login.php:10
-msgid "Your provided credentials are incomplete."
-msgstr "Die von Ihnen angegebenen Zugangsdaten sind unvollständig."
-
-#: src/views/login.php:11
-msgid "Your provided credentials are invalid."
-msgstr "Die von Ihnen angegebenen Zugangsdaten sind ungültig."
-
-#: src/views/login.php:12
-msgid ""
-"You do not have any imprints configured. Please log into the Client Portal "
-"of IT-Recht Kanzlei."
-msgstr ""
-"Sie haben noch keine Impressen eingerichtet. Bitte loggen Sie sich in das "
-"Mandantenportal der IT-Recht Kanzlei ein."
-
 #: src/views/login.php:13
-msgid ""
-"The selected imprint is not active anymore. Please reload the page and "
-"repeat the process."
-msgstr ""
-"Das ausgewählte Impressum ist nicht mehr aktiv. Bitte laden Sie die Seite "
-"neu und wiederholen Sie den Vorgang."
-
-#: src/views/login.php:104
 msgid ""
 "In a few steps to legal texts on this Wordpress installation that are safe "
 "from warning letters"
@@ -351,43 +315,46 @@ msgstr ""
 "In wenigen Schritten zu abmahnsicheren Rechtstexten auf dieser Wordpress-"
 "Installation"
 
-#: src/views/login.php:105
-msgid ""
-"Note: Prerequisite for the use of plugins is the booking of the AGB service "
-"of IT-Recht Kanzlei."
-msgstr ""
-"Hinweis: Die Verwendung des Plugins setzt die Nutzung des AGB-Service der IT-"
-"Recht Kanzlei voraus."
+#: src/views/login.php:15
+msgid "Note:"
+msgstr "Hinweis:"
 
-#: src/views/login.php:105
+#: src/views/login.php:15
+msgid ""
+"Prerequisite for the use of plugins is the booking of the AGB service of IT-"
+"Recht Kanzlei."
+msgstr ""
+"Die Verwendung des Plugins setzt die Nutzung des AGB-Service der IT-Recht "
+"Kanzlei voraus."
+
+#: src/views/login.php:16
 msgid "If necessary, you can book this service here."
 msgstr "Diesen Service können Sie hier buchen."
 
-#: src/views/login.php:107
+#: src/views/login.php:18
 msgid "Login"
 msgstr "Anmelden"
 
-#: src/views/login.php:109
+#: src/views/login.php:21
 msgid ""
 "Please enter the access data for your account at IT-Recht Kanzlei below."
 msgstr ""
 "Bitte geben Sie nachfolgend die Zugangsdaten für Ihren Account bei der IT-"
 "Recht Kanzlei ein."
 
-#: src/views/login.php:109
-msgid "Part 1 of the AGB interface is thus automatically set up for you."
-msgstr ""
-"Teil 1 der AGB-Schnittstelle wird damit automatisch für Sie eingerichtet."
+#: src/views/login.php:22
+msgid "The legal text interface is then automatically set up for you."
+msgstr "Die AGB-Schnittstelle wird damit automatisch für Sie eingerichtet."
 
-#: src/views/login.php:109
+#: src/views/login.php:23
 msgid "On the following page you will see the next steps."
 msgstr "Auf der Folgeseite sehen Sie dann die nächsten Schritte."
 
-#: src/views/login.php:111
+#: src/views/login.php:26
 msgid "Password"
 msgstr "Passwort"
 
-#: src/views/login.php:116
+#: src/views/login.php:31
 msgid ""
 "Several imprints/companies are assigned to your account. Select below for "
 "which of them this GTC interface should be set up."
@@ -396,15 +363,15 @@ msgstr ""
 "Wählen Sie unten aus für welches davon diese AGB-Schnittstelle eingerichtet "
 "werden soll."
 
-#: src/views/login.php:122
+#: src/views/login.php:37
 msgid "Login now"
 msgstr "Jetzt Anmelden"
 
-#: src/views/login.php:123
+#: src/views/login.php:38
 msgid "Save settings"
 msgstr "Einstellungen Speichern"
 
-#: src/views/settings-header.php:9
+#: src/views/settings-header.php:11
 msgid ""
 "The PHP setting \"display_errors\" is active. This may cause errors or "
 "warnings triggered by other plugins to be displayed and thus interfere with "
@@ -417,7 +384,7 @@ msgstr ""
 "Einstellung \"display_errors\" auf aus oder bitten Sie Ihren Service-"
 "Provider darum."
 
-#: src/views/settings-header.php:18
+#: src/views/settings-header.php:20
 msgid ""
 "You have disabled the automatic email attachments (T&C and cancellation "
 "policy) for the order confirmation email to buyers. Please make sure that "
@@ -430,7 +397,7 @@ msgstr ""
 "Rechte hingewiesen werden, da Sie sonst abmahngefährdet sind."
 
 #. translators: Keep the [link][/link] tag intact. %1$s is a list of legal texts.
-#: src/views/settings-header.php:39
+#: src/views/settings-header.php:41
 msgid ""
 "You have stored manually generated PDF files for some legal texts (%1$s) in "
 "the [link]Germanized > Emails > PDF Attachments[/link] settings. Please "
@@ -441,7 +408,7 @@ msgstr ""
 "hinterlegt. Bitte denken Sie daran, diese regelmäßig auf Aktualität zu "
 "prüfen."
 
-#: src/views/settings-header.php:58
+#: src/views/settings-header.php:60
 msgid ""
 "The 'Assign documents' button takes you to the interface overview for this "
 "presence in the client portal."
@@ -449,46 +416,46 @@ msgstr ""
 "Über den Button 'Dokumente zuweisen' gelangen Sie zur "
 "Schnittstellenübersicht für diese Präsenz im Mandantenportal."
 
-#: src/views/settings-header.php:59
+#: src/views/settings-header.php:61
 msgid ""
 "There you can use the sliders to assign the documents you want/need here."
 msgstr ""
 "Dort können Sie mit den Schiebereglern die hier gewünschten/benötigten "
 "Dokumente zuweisen."
 
-#: src/views/settings-header.php:60
+#: src/views/settings-header.php:62
 msgid "These are then transmitted to the plugin."
 msgstr "Diese werden dann an das Plugin übermittelt."
 
-#: src/views/settings-header.php:65
+#: src/views/settings-header.php:67
 msgid "Step by step guide"
 msgstr "Schritt für Schritt Anleitung"
 
-#: src/views/settings-header.php:66
+#: src/views/settings-header.php:68
 msgid "Assign documents"
 msgstr "Dokumente zuweisen"
 
-#: src/views/settings-page.php:20
+#: src/views/settings-page.php:27
 msgid "There is no document available for this type yet."
 msgstr "Für diesen Typ ist noch kein Dokument verfügbar."
 
-#: src/views/settings-page.php:21
+#: src/views/settings-page.php:28
 msgid "Set up now."
 msgstr "Jetzt einrichten."
 
-#: src/views/settings-page.php:33
+#: src/views/settings-page.php:40
 msgid "Country"
 msgstr "Land"
 
-#: src/views/settings-page.php:34
+#: src/views/settings-page.php:41
 msgid "Language"
 msgstr "Sprache"
 
-#: src/views/settings-page.php:36
+#: src/views/settings-page.php:43
 msgid "Shortcode"
 msgstr "Shortcode"
 
-#: src/views/settings-page.php:40
+#: src/views/settings-page.php:47
 msgid ""
 "Copy the respective shortcode and paste it at the position in your Wordpress "
 "page where you want the corresponding text to be displayed."
@@ -497,11 +464,11 @@ msgstr ""
 "ihrer Wordpress Seite ein, an der Sie den entsprechenden Text angezeigt "
 "bekommen möchten."
 
-#: src/views/settings-page.php:44
+#: src/views/settings-page.php:52
 msgid "Last transmission"
 msgstr "Letzte Übertragung"
 
-#: src/views/settings-page.php:64
+#: src/views/settings-page.php:72
 msgid ""
 "The document is incomplete. Please transfer it again from the client portal. "
 "If the error persists, please contact the IT-Recht Kanzlei."
@@ -510,64 +477,91 @@ msgstr ""
 "Mandantenportal. Sollte der Fehler bestehen bleiben, kontaktieren Sie bitte "
 "die IT-Recht Kanzlei."
 
-#: src/views/settings-page.php:81
+#: src/views/settings-page.php:89
 msgid "This shortcode is currently not in use."
 msgstr "Dieser Shortcode wird derzeit nicht verwendet."
 
-#: src/views/settings-page.php:84
+#: src/views/settings-page.php:92
 msgid "Copy shortcode"
 msgstr "Shortcode kopieren"
 
-#: src/views/settings-page.php:89
+#: src/views/settings-page.php:97
 msgid "Delete document"
 msgstr "Dokument löschen"
 
-#: src/views/settings-page.php:91
+#: src/views/settings-page.php:99
 msgid "View Page (Shortcode not in use yet)"
 msgstr "Seite ansehen (Shortcode noch nicht in Verwendung)"
 
-#: src/views/settings-page.php:93
+#: src/views/settings-page.php:101
 msgid "Delete document (still in use)"
 msgstr "Dokument löschen (wird noch verwendet)"
 
-#: src/views/settings-page.php:94
+#: src/views/settings-page.php:102
 msgid "View Page"
 msgstr "Seite ansehen"
 
-#: src/views/settings-page.php:101
+#: src/views/settings-page.php:109
 msgid "Now"
 msgstr "Jetzt"
 
 #. translators: %d will be replaced with the number of seconds
-#: src/views/settings-page.php:104
+#: src/views/settings-page.php:112
 msgid "%d seconds ago"
 msgstr "vor %d Sekunden"
 
-#: src/views/settings-page.php:106
+#: src/views/settings-page.php:114
 msgid "a minute ago"
 msgstr "vor einer Minute"
 
 #. translators: %d will be replaced with the number of seconds
-#: src/views/settings-page.php:109
+#: src/views/settings-page.php:117
 msgid "%d minutes ago"
 msgstr "vor %d Minuten"
 
 #. translators: A date time format compliant to https://www.php.net/manual/datetime.format.php
-#: src/views/settings-page.php:112
+#: src/views/settings-page.php:120
 msgid "M d, Y \\a\\t g:i a"
 msgstr "d.m.Y H:i \\U\\h\\r"
 
-#: src/views/uninstall-old-plugin.php:5
-msgid "Do you want to uninstall the old AGB Connector plugin right away?"
-msgstr "Möchten Sie das alte AGB Connector Plugin direkt deinstallieren?"
+#~ msgid "Error saving updated post!"
+#~ msgstr "Fehler beim Speichern des aktualisierten Beitrags!"
 
-#: src/views/uninstall-old-plugin.php:7
-msgid "Uninstall"
-msgstr "Deinstallieren"
+#~ msgid "The old T&C Connector has been deleted successfully."
+#~ msgstr "Der alte AGB Connector wurde erfolgreich deinstalliert."
 
-#: src/views/uninstall-old-plugin.php:8
-msgid "Keep"
-msgstr "Behalten"
+#~ msgid ""
+#~ "Please note that the old T&C Connector and this plugin cannot be used "
+#~ "together, as conflicts may occur. If you uninstall this plugin and "
+#~ "reactivate the old T&C Connector, you will have to set it up again."
+#~ msgstr ""
+#~ "Bitte beachten Sie, dass der alte AGB-Connector und dieses Plugin nicht "
+#~ "zusammen verwendet werden können, da es zu Konflikten kommen kann. "
+#~ "Sollten Sie dieses Plugin deinstallieren und den alten AGB-Connector "
+#~ "reaktivieren müssen Sie diesen neu einrichten."
+
+#~ msgid ""
+#~ "We have found settings of the old T&C Connector plugin and successfully "
+#~ "transferred them to this plugin. The old plugin has been deactivated. "
+#~ "Please check whether all desired legal texts are correctly integrated. If "
+#~ "necessary, transfer the texts from the client portal again. Please note "
+#~ "that errors may occur when reactivating the old plugin."
+#~ msgstr ""
+#~ "Wir haben Einstellungen des alten AGB Connector Plugins gefunden und auf "
+#~ "dieses Plugin erfolgreich übertragen. Das alte Plugin wurde deaktiviert. "
+#~ "Bitte Kontrollieren Sie, ob alle gewünschten Rechtstexte korrekt "
+#~ "eingebunden werden. Übertragen Sie, falls nötig, die Texte erneut aus dem "
+#~ "Mandantenportal. Beachten Sie, dass es bei der Reaktivierung des alten "
+#~ "Plugins zu Fehlern kommen kann."
+
+#~ msgid "Do you want to uninstall the old AGB Connector plugin right away?"
+#~ msgstr "Möchten Sie das alte AGB Connector Plugin direkt deinstallieren?"
+
+#~ msgid "Uninstall"
+#~ msgstr "Deinstallieren"
+
+#~ msgid "Keep"
+#~ msgstr "Behalten"
 
 #~ msgid "The following document has been deleted:"
 #~ msgstr "Folgendes Dokument wurde gelöscht:"

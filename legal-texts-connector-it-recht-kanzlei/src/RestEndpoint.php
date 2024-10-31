@@ -17,7 +17,11 @@ class RestEndpoint {
         // legal text API requests.
         add_filter('weglot_active_translation', function () {
             return false;
-        }, PHP_INT_MAX);
+        });
+        // Disable translation for TranslatePress-Multilingual
+        add_filter('trp_stop_translating_page', function () {
+            return true;
+        });
 
         $itrkLtiHandler = new ItrkLtiHandler();
         $lti = new \ITRechtKanzlei\LTI(
@@ -28,7 +32,7 @@ class RestEndpoint {
 
         $xml = $req->get_param('xml');
         $xml = is_string($xml) ? $xml : '';
-        // Older versions of Wordpress may auto-escape the input.
+        // Older versions of WordPress may auto-escape the input.
         if ((($xmlHeadEndPos = strpos($xml, '?>')) > 0) && (strpos(substr($xml, 0, $xmlHeadEndPos), '\"') > 0)) {
             $xml = wp_unslash($xml);
         }
@@ -38,7 +42,7 @@ class RestEndpoint {
 
     public static function registerRoutes() {
         register_rest_route(
-            Plugin::PLUGIN_NAME.'/v1',
+            \LegalTextsConnector::PLUGIN_NAME.'/v1',
             'lti',
             [
                 [
@@ -55,8 +59,8 @@ class RestEndpoint {
                 $server->send_header('Content-Type', 'application/xml; charset=utf-8');
                 // Helper to return a XML instead of a JSON response for the REST-API endpoint.
                 // $resonseData contains a SimpleXML object that is converted to string.
-                // Therefore the data is santitized already.
-                echo $resonseData; // No escaping. See comment above.
+                // Therefore the data is sanitized already.
+                echo $resonseData; // @Review Team: No escaping. See comment above.
                 return true;
             }
             return $served;

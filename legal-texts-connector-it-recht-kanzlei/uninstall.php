@@ -6,8 +6,7 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
     die();
 }
 
-if (!class_exists('ITRechtKanzlei\LegalTextsConnector\Install')) {
+if (!class_exists('ITRechtKanzlei\LegalTextsConnector\Plugin')) {
     require_once __DIR__ . '/src/Plugin.php';
-    require_once __DIR__ . '/src/Install.php';
-    \ITRechtKanzlei\LegalTextsConnector\Install::cleanPluginConfigs();
 }
+\ITRechtKanzlei\LegalTextsConnector\Plugin::cleanPluginConfigs();

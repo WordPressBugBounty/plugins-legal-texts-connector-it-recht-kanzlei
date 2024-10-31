@@ -1,15 +1,15 @@
-# Copyright (C) 2023 IT-Recht Kanzlei
+# Copyright (C) 2024 IT-Recht Kanzlei
 # This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Legal Text Connector of the IT-Recht Kanzlei 1.0.7\n"
+"Project-Id-Version: Legal Text Connector of the IT-Recht Kanzlei 1.0.9\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/legal-texts-connector-it-recht-kanzlei\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-18T16:04:23+01:00\n"
+"POT-Creation-Date: 2024-10-29T01:03:25+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.0\n"
 "X-Domain: legal-texts-connector-it-recht-kanzlei\n"
@@ -23,7 +23,7 @@ msgid "https://www.it-recht-kanzlei.de/anleitung-wordpress-praesenzen-und-woocom
 msgstr ""
 
 #. Description of the plugin
-msgid "Ensures your website is always up-to-date with legal texts from the IT law firm that are safe from legal notices after booking the GTC service and a one-time setup."
+msgid "Ensures that your website is always provided with warning-proof legal texts from IT-Recht Kanzlei after booking the GTC service."
 msgstr ""
 
 #. Author of the plugin
@@ -38,185 +38,181 @@ msgstr ""
 msgid "WP_Filesystem cannot be initialized. Please make sure the filesystem is writable."
 msgstr ""
 
-#. translators: first %s is the method, second %s is a list of error messages.
-#: src/Helper.php:36
-msgid "WP_Filesystem (%1$s) encounterd errors during the initialization: %2$s"
+#. translators: %2$s will be replaced with a list of error messages.
+#: src/Helper.php:38
+msgid "WP_Filesystem (%1$s) encountered errors during the initialization: %2$s"
 msgstr ""
 
-#: src/Install.php:188
-msgid "Error saving updated post!"
-msgstr ""
-
-#: src/ItrkLtiHandler.php:72
+#: src/ItrkLtiHandler.php:77
 msgid "The legal text could not be stored in the database."
 msgstr ""
 
-#: src/ItrkLtiHandler.php:94
+#: src/ItrkLtiHandler.php:99
 msgid "Unable to create the directory for storing the pdf documents."
 msgstr ""
 
-#: src/ItrkLtiHandler.php:103
+#: src/ItrkLtiHandler.php:108
 msgid "The file could not be written."
 msgstr ""
 
-#: src/ItrkLtiHandler.php:109
+#: src/ItrkLtiHandler.php:114
 msgid "The pdf document could not be saved."
 msgstr ""
 
 #. translators: %s will be replaced with an error message.
-#: src/ItrkLtiHandler.php:111
+#: src/ItrkLtiHandler.php:116
 msgid "Reason: %s"
 msgstr ""
 
-#: src/Plugin.php:83
+#: src/Plugin.php:98
 msgid "German"
 msgstr ""
 
-#: src/Plugin.php:84
+#: src/Plugin.php:99
 msgid "French"
 msgstr ""
 
-#: src/Plugin.php:85
+#: src/Plugin.php:100
 msgid "English"
 msgstr ""
 
-#: src/Plugin.php:86
+#: src/Plugin.php:101
 msgid "Spanish"
 msgstr ""
 
-#: src/Plugin.php:87
+#: src/Plugin.php:102
 msgid "Italian"
 msgstr ""
 
-#: src/Plugin.php:88
+#: src/Plugin.php:103
 msgid "Dutch"
 msgstr ""
 
-#: src/Plugin.php:89
+#: src/Plugin.php:104
 msgid "Polish"
 msgstr ""
 
-#: src/Plugin.php:90
+#: src/Plugin.php:105
 msgid "Swedish"
 msgstr ""
 
-#: src/Plugin.php:91
+#: src/Plugin.php:106
 msgid "Danish"
 msgstr ""
 
-#: src/Plugin.php:92
+#: src/Plugin.php:107
 msgid "Czech"
 msgstr ""
 
-#: src/Plugin.php:93
+#: src/Plugin.php:108
 msgid "Slovenian"
 msgstr ""
 
-#: src/Plugin.php:94
+#: src/Plugin.php:109
 msgid "Portuguese"
 msgstr ""
 
-#: src/Plugin.php:95
+#: src/Plugin.php:110
 msgid "Norwegian"
 msgstr ""
 
-#: src/Plugin.php:96
+#: src/Plugin.php:111
 msgid "Turkish"
 msgstr ""
 
-#: src/Plugin.php:107
+#: src/Plugin.php:122
 msgid "Germany"
 msgstr ""
 
-#: src/Plugin.php:108
+#: src/Plugin.php:123
 msgid "Austria"
 msgstr ""
 
-#: src/Plugin.php:109
+#: src/Plugin.php:124
 msgid "Switzerland"
 msgstr ""
 
-#: src/Plugin.php:110
+#: src/Plugin.php:125
 msgid "Sweden"
 msgstr ""
 
-#: src/Plugin.php:111
+#: src/Plugin.php:126
 msgid "Spain"
 msgstr ""
 
-#: src/Plugin.php:112
+#: src/Plugin.php:127
 msgid "Italy"
 msgstr ""
 
-#: src/Plugin.php:113
+#: src/Plugin.php:128
 msgid "Poland"
 msgstr ""
 
-#: src/Plugin.php:114
+#: src/Plugin.php:129
 msgid "England"
 msgstr ""
 
-#: src/Plugin.php:115
+#: src/Plugin.php:130
 msgid "France"
 msgstr ""
 
-#: src/Plugin.php:116
+#: src/Plugin.php:131
 msgid "Belgium"
 msgstr ""
 
-#: src/Plugin.php:117
+#: src/Plugin.php:132
 msgid "Netherlands"
 msgstr ""
 
-#: src/Plugin.php:118
+#: src/Plugin.php:133
 msgid "USA"
 msgstr ""
 
-#: src/Plugin.php:119
+#: src/Plugin.php:134
 msgid "Canada"
 msgstr ""
 
-#: src/Plugin.php:120
+#: src/Plugin.php:135
 msgid "Ireland"
 msgstr ""
 
-#: src/Plugin.php:121
+#: src/Plugin.php:136
 msgid "Czech Republic"
 msgstr ""
 
-#: src/Plugin.php:122
+#: src/Plugin.php:137
 msgid "Denmark"
 msgstr ""
 
-#: src/Plugin.php:123
+#: src/Plugin.php:138
 msgid "Luxembourg"
 msgstr ""
 
-#: src/Plugin.php:124
+#: src/Plugin.php:139
 msgid "Slovenia"
 msgstr ""
 
-#: src/Plugin.php:125
+#: src/Plugin.php:140
 msgid "Australia"
 msgstr ""
 
-#: src/Plugin.php:126
+#: src/Plugin.php:141
 msgid "Portugal"
 msgstr ""
 
-#: src/Plugin.php:137
+#: src/Plugin.php:153
 msgid "Terms and Conditions"
 msgstr ""
 
-#: src/Plugin.php:138
+#: src/Plugin.php:154
 msgid "Privacy"
 msgstr ""
 
-#: src/Plugin.php:139
+#: src/Plugin.php:155
 msgid "Refund Policy"
 msgstr ""
 
-#: src/Plugin.php:140
+#: src/Plugin.php:156
 msgid "Imprint"
 msgstr ""
 
@@ -224,228 +220,208 @@ msgstr ""
 msgid "Legal Texts Connector of the IT-Recht Kanzlei"
 msgstr ""
 
-#: src/SettingsPage.php:42
-msgid "The old T&C Connector has been deleted successfully."
-msgstr ""
-
-#: src/SettingsPage.php:52
-msgid "Please note that the old T&C Connector and this plugin cannot be used together, as conflicts may occur. If you uninstall this plugin and reactivate the old T&C Connector, you will have to set it up again."
-msgstr ""
-
-#: src/SettingsPage.php:64
-msgid "We have found settings of the old T&C Connector plugin and successfully transferred them to this plugin. The old plugin has been deactivated. Please check whether all desired legal texts are correctly integrated. If necessary, transfer the texts from the client portal again. Please note that errors may occur when reactivating the old plugin."
-msgstr ""
-
-#: src/SettingsPage.php:82
+#: src/SettingsPage.php:40
 msgid "Settings"
 msgstr ""
 
-#: src/SettingsPage.php:87
+#: src/SettingsPage.php:45
 msgid "Reset Settings"
 msgstr ""
 
+#: src/SettingsPage.php:155
+msgid "An unknown error occurred."
+msgstr ""
+
+#: src/SettingsPage.php:156
+msgid "A connection to the server of IT-Recht Kanzlei could not be established. Error Details:"
+msgstr ""
+
+#: src/SettingsPage.php:157
+msgid "Your provided credentials are incomplete."
+msgstr ""
+
+#: src/SettingsPage.php:158
+msgid "Your provided credentials are invalid."
+msgstr ""
+
+#: src/SettingsPage.php:159
+msgid "You do not have any imprints configured. Please log into the Client Portal of IT-Recht Kanzlei."
+msgstr ""
+
+#: src/SettingsPage.php:160
+msgid "The selected imprint is not active anymore. Please reload the page and repeat the process."
+msgstr ""
+
 #. translators: %4$s will be replaced with the language name the document is for.
-#: src/SettingsPage.php:200
+#: src/SettingsPage.php:201
 msgid "The document %1$s \"%2$s\" for the country %3$s in the language %4$s has been deleted."
 msgstr ""
 
-#: src/ShortCodes.php:82
+#: src/ShortCodes.php:80
 msgid "Please use the copy function to the right of the shortcodes in the plugin and paste it here. Make sure you select the correct language."
 msgstr ""
 
 #. translators: %s will be replaced with the short code name.
-#: src/ShortCodes.php:98
+#: src/ShortCodes.php:96
 msgid "No content found for %s. Please transfer the legal texts again."
 msgstr ""
 
-#: src/views/login.php:8
-msgid "An unknown error occured."
-msgstr ""
-
-#: src/views/login.php:9
-msgid "A connection to the server of IT-Recht Kanzlei could not be established. Error Details:"
-msgstr ""
-
-#: src/views/login.php:10
-msgid "Your provided credentials are incomplete."
-msgstr ""
-
-#: src/views/login.php:11
-msgid "Your provided credentials are invalid."
-msgstr ""
-
-#: src/views/login.php:12
-msgid "You do not have any imprints configured. Please log into the Client Portal of IT-Recht Kanzlei."
-msgstr ""
-
 #: src/views/login.php:13
-msgid "The selected imprint is not active anymore. Please reload the page and repeat the process."
-msgstr ""
-
-#: src/views/login.php:104
 msgid "In a few steps to legal texts on this Wordpress installation that are safe from warning letters"
 msgstr ""
 
-#: src/views/login.php:105
-msgid "Note: Prerequisite for the use of plugins is the booking of the AGB service of IT-Recht Kanzlei."
+#: src/views/login.php:15
+msgid "Note:"
 msgstr ""
 
-#: src/views/login.php:105
+#: src/views/login.php:15
+msgid "Prerequisite for the use of plugins is the booking of the AGB service of IT-Recht Kanzlei."
+msgstr ""
+
+#: src/views/login.php:16
 msgid "If necessary, you can book this service here."
 msgstr ""
 
-#: src/views/login.php:107
+#: src/views/login.php:18
 msgid "Login"
 msgstr ""
 
-#: src/views/login.php:109
+#: src/views/login.php:21
 msgid "Please enter the access data for your account at IT-Recht Kanzlei below."
 msgstr ""
 
-#: src/views/login.php:109
-msgid "Part 1 of the AGB interface is thus automatically set up for you."
+#: src/views/login.php:22
+msgid "The legal text interface is then automatically set up for you."
 msgstr ""
 
-#: src/views/login.php:109
+#: src/views/login.php:23
 msgid "On the following page you will see the next steps."
 msgstr ""
 
-#: src/views/login.php:111
+#: src/views/login.php:26
 msgid "Password"
 msgstr ""
 
-#: src/views/login.php:116
+#: src/views/login.php:31
 msgid "Several imprints/companies are assigned to your account. Select below for which of them this GTC interface should be set up."
 msgstr ""
 
-#: src/views/login.php:122
+#: src/views/login.php:37
 msgid "Login now"
 msgstr ""
 
-#: src/views/login.php:123
+#: src/views/login.php:38
 msgid "Save settings"
 msgstr ""
 
-#: src/views/settings-header.php:9
+#: src/views/settings-header.php:11
 msgid "The PHP setting \"display_errors\" is active. This may cause errors or warnings triggered by other plugins to be displayed and thus interfere with the transmission of the legal texts. Please set the \"display_errors\" setting to off or ask your service provider to do so."
 msgstr ""
 
-#: src/views/settings-header.php:18
+#: src/views/settings-header.php:20
 msgid "You have disabled the automatic email attachments (T&C and cancellation policy) for the order confirmation email to buyers. Please make sure that buyers are made aware of their rights elsewhere in the order confirmation, otherwise you are at risk of legal notices."
 msgstr ""
 
 #. translators: Keep the [link][/link] tag intact. %1$s is a list of legal texts.
-#: src/views/settings-header.php:39
+#: src/views/settings-header.php:41
 msgid "You have stored manually generated PDF files for some legal texts (%1$s) in the [link]Germanized > Emails > PDF Attachments[/link] settings. Please remember to check these regularly to ensure they are up to date."
 msgstr ""
 
-#: src/views/settings-header.php:58
+#: src/views/settings-header.php:60
 msgid "The 'Assign documents' button takes you to the interface overview for this presence in the client portal."
 msgstr ""
 
-#: src/views/settings-header.php:59
+#: src/views/settings-header.php:61
 msgid "There you can use the sliders to assign the documents you want/need here."
 msgstr ""
 
-#: src/views/settings-header.php:60
+#: src/views/settings-header.php:62
 msgid "These are then transmitted to the plugin."
 msgstr ""
 
-#: src/views/settings-header.php:65
+#: src/views/settings-header.php:67
 msgid "Step by step guide"
 msgstr ""
 
-#: src/views/settings-header.php:66
+#: src/views/settings-header.php:68
 msgid "Assign documents"
 msgstr ""
 
-#: src/views/settings-page.php:20
+#: src/views/settings-page.php:27
 msgid "There is no document available for this type yet."
 msgstr ""
 
-#: src/views/settings-page.php:21
+#: src/views/settings-page.php:28
 msgid "Set up now."
 msgstr ""
 
-#: src/views/settings-page.php:33
+#: src/views/settings-page.php:40
 msgid "Country"
 msgstr ""
 
-#: src/views/settings-page.php:34
+#: src/views/settings-page.php:41
 msgid "Language"
 msgstr ""
 
-#: src/views/settings-page.php:36
+#: src/views/settings-page.php:43
 msgid "Shortcode"
 msgstr ""
 
-#: src/views/settings-page.php:40
+#: src/views/settings-page.php:47
 msgid "Copy the respective shortcode and paste it at the position in your Wordpress page where you want the corresponding text to be displayed."
 msgstr ""
 
-#: src/views/settings-page.php:44
+#: src/views/settings-page.php:52
 msgid "Last transmission"
 msgstr ""
 
-#: src/views/settings-page.php:64
+#: src/views/settings-page.php:72
 msgid "The document is incomplete. Please transfer it again from the client portal. If the error persists, please contact the IT-Recht Kanzlei."
 msgstr ""
 
-#: src/views/settings-page.php:81
+#: src/views/settings-page.php:89
 msgid "This shortcode is currently not in use."
 msgstr ""
 
-#: src/views/settings-page.php:84
+#: src/views/settings-page.php:92
 msgid "Copy shortcode"
 msgstr ""
 
-#: src/views/settings-page.php:89
+#: src/views/settings-page.php:97
 msgid "Delete document"
 msgstr ""
 
-#: src/views/settings-page.php:91
+#: src/views/settings-page.php:99
 msgid "View Page (Shortcode not in use yet)"
 msgstr ""
 
-#: src/views/settings-page.php:93
+#: src/views/settings-page.php:101
 msgid "Delete document (still in use)"
 msgstr ""
 
-#: src/views/settings-page.php:94
+#: src/views/settings-page.php:102
 msgid "View Page"
 msgstr ""
 
-#: src/views/settings-page.php:101
+#: src/views/settings-page.php:109
 msgid "Now"
 msgstr ""
 
 #. translators: %d will be replaced with the number of seconds
-#: src/views/settings-page.php:104
+#: src/views/settings-page.php:112
 msgid "%d seconds ago"
 msgstr ""
 
-#: src/views/settings-page.php:106
+#: src/views/settings-page.php:114
 msgid "a minute ago"
 msgstr ""
 
 #. translators: %d will be replaced with the number of seconds
-#: src/views/settings-page.php:109
+#: src/views/settings-page.php:117
 msgid "%d minutes ago"
 msgstr ""
 
 #. translators: A date time format compliant to https://www.php.net/manual/datetime.format.php
-#: src/views/settings-page.php:112
+#: src/views/settings-page.php:120
 msgid "M d, Y \\a\\t g:i a"
-msgstr ""
-
-#: src/views/uninstall-old-plugin.php:5
-msgid "Do you want to uninstall the old AGB Connector plugin right away?"
-msgstr ""
-
-#: src/views/uninstall-old-plugin.php:7
-msgid "Uninstall"
-msgstr ""
-
-#: src/views/uninstall-old-plugin.php:8
-msgid "Keep"
 msgstr ""

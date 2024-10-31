@@ -13,6 +13,10 @@ class ShortCodes {
 
     public static function settings() {
         return (array)apply_filters('agb_shortcodes', [
+            'agb_imprint' => [
+                'name' => Plugin::getDocumentName('impressum'),
+                'setting_key' => 'impressum',
+            ],
             'agb_terms' => [
                 'name' => Plugin::getDocumentName('agb'),
                 'setting_key' => 'agb',
@@ -24,10 +28,6 @@ class ShortCodes {
             'agb_revocation' => [
                 'name' => Plugin::getDocumentName('widerruf'),
                 'setting_key' => 'widerruf',
-            ],
-            'agb_imprint' => [
-                'name' => Plugin::getDocumentName('impressum'),
-                'setting_key' => 'impressum',
             ],
         ]);
     }
@@ -101,6 +101,8 @@ class ShortCodes {
             ['agb_content', $shortCode],
             preg_split('#\s+#', $attr['class'])
         ))));
+        // Prevent google tranlsate from translating the legal texts.
+        $classes .= ' notranslate';
 
         return sprintf(
             '<div %1$s class="%2$s">%3$s</div>',
@@ -119,10 +121,6 @@ class ShortCodes {
         }
         $tag = isset($map[$type]) ? $map[$type] : 'itrk_missing_key';
         return sprintf('[%s language="%s" country="%s"]', $tag, $language, $country);
-    }
-
-    public static function getShortCodeForDocument(Document $doc) {
-        return self::createShortCode($doc->getType(), $doc->getLanguage(), $doc->getCountry());
     }
 
     public static function getPageIdForShortCode($shortcode) {

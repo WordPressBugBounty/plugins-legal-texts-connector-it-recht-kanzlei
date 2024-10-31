@@ -3,20 +3,21 @@
  * Plugin Name: Legal Text Connector of the IT-Recht Kanzlei
  * Plugin Slug: legal-texts-connector-it-recht-kanzlei
  * Plugin URI: https://www.it-recht-kanzlei.de/anleitung-wordpress-praesenzen-und-woocommerce-shops-einrichten-mit-der-rechtstexte-schnittstelle-der-it-recht-kanzlei.html
- * Description: Ensures your website is always up-to-date with legal texts from the IT law firm that are safe from legal notices after booking the GTC service and a one-time setup.
+ * Description: Ensures that your website is always provided with warning-proof legal texts from IT-Recht Kanzlei after booking the GTC service.
  * Author: IT-Recht Kanzlei
  * Author URI: https://www.it-recht-kanzlei.de/
  * Text Domain: legal-texts-connector-it-recht-kanzlei
- * Version: 1.0.8
- * Stable tag: 1.0.8
+ * Version: 1.0.10
+ * Stable tag: 1.0.10
  * Requires at least: 4.4
- * Tested up to: 6.5
+ * Tested up to: 6.7
  * Requires PHP: 7.1
  * License: GPLv3 or later
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */
 class LegalTextsConnector {
-    const VERSION = '1.0.7';
+    const VERSION = '1.0.10';
+    const PLUGIN_NAME  = 'legal-texts-connector-it-recht-kanzlei';
 
     public function __construct() {
         if (!defined('PHP_VERSION_ID') || (PHP_VERSION_ID < 70100) || !function_exists('add_action')) {
@@ -53,11 +54,6 @@ class LegalTextsConnector {
         add_action('init', function () {
             load_plugin_textdomain('legal-texts-connector-it-recht-kanzlei', false, plugin_basename(__DIR__).'/languages');
         });
-
-        register_activation_hook(__FILE__, function () {
-            $this->includeRequirements();
-            \ITRechtKanzlei\LegalTextsConnector\Install::activate();
-        });
     }
 
     private function includeRequirements() {
@@ -65,12 +61,13 @@ class LegalTextsConnector {
             return;
         }
         require_once(__DIR__ . '/src/Document.php');
-        require_once(__DIR__ . '/src/Install.php');
         require_once(__DIR__ . '/src/ShortCodes.php');
         require_once(__DIR__ . '/src/Plugin.php');
         require_once(__DIR__ . '/src/SettingsPage.php');
     }
 
 }
+
+if (!defined('ABSPATH')) exit;
 
 new LegalTextsConnector();

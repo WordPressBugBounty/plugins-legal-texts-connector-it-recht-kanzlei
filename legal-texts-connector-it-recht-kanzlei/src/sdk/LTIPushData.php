@@ -9,18 +9,19 @@ class LTIPushData {
     public const DOCTYPE_IMPRINT              = 'impressum';
     public const DOCTYPE_TERMS_AND_CONDITIONS = 'agb';
     public const DOCTYPE_CAMCELLATION_POLICY  = 'widerruf';
+    public const DOCTYPE_CANCELLATION_POLICY  = 'widerruf';
     public const DOCTYPE_PRIVACY_POLICY       = 'datenschutz';
 
     protected const ALLOWED_DOCUMENT_TYPES = [
         self::DOCTYPE_IMPRINT,
         self::DOCTYPE_TERMS_AND_CONDITIONS,
-        self::DOCTYPE_CAMCELLATION_POLICY,
+        self::DOCTYPE_CANCELLATION_POLICY,
         self::DOCTYPE_PRIVACY_POLICY
     ];
 
     public const DOCTYPES_TO_MAIL = [
         self::DOCTYPE_TERMS_AND_CONDITIONS,
-        self::DOCTYPE_CAMCELLATION_POLICY
+        self::DOCTYPE_CANCELLATION_POLICY
     ];
 
     protected $xmlData = null;
@@ -36,13 +37,13 @@ class LTIPushData {
 
     public function getMultiShopId(): string {
         // Only check this element, if it is explicitly requested.
-        // The implmenentations that are not multishop capable do not require
+        // The implementations that are not multishop-capable do not require
         // this parameter to be set.
         $this->checkXmlElementAvailable('user_account_id', null, LTIError::INVALID_USER_ACCOUNT_ID);
         return (string)$this->xmlData->user_account_id;
     }
 
-    public function getTitle(): string {
+        public function getTitle(): string {
         return (string)$this->xmlData->rechtstext_title;
     }
 

@@ -11,70 +11,28 @@ class SettingsPage {
     private $messages = [];
 
     public function addMenu() {
-        $hook = add_options_page(
+        add_options_page(
             __('Legal Texts Connector of the IT-Recht Kanzlei', 'legal-texts-connector-it-recht-kanzlei'),
             'IT-Recht Kanzlei',
             'edit_pages',
             self::PAGE_SETTINGS,
             [$this, $this->getPage()]
         );
-        add_action('load-' . $hook, [$this, 'setup']);
+    }
+
+    public function enqueueScripts() {
+        if (Plugin::isSetup()) {
+            $this->enqueueSettingsPageScripts();
+        } else {
+            $this->enqueueLoginDialogScripts();
+        }
     }
 
     private function getPage() {
-        switch (Install::getStatus()) {
-            case Install::SETUP_CONVERTED:
-            case Install::SETUP_COMPLETE:
-                return 'settingsPageView';
-            case Install::SETUP_INCOMPLETE:
-            default:
-                return 'loginDialogView';
+        if (Plugin::isSetup()) {
+            return 'settingsPageView';
         }
-    }
-
-    public function setup() {
-        if (Install::isStatus(Install::SETUP_CONVERTED, FILTER_SANITIZE_STRING)) {
-            if (filter_input(INPUT_POST, 'uninstall')) {
-                Install::deinstallOldPlugin();
-                Install::setStatus(Install::SETUP_COMPLETE);
-                $this->messages[] = new Message(
-                    Message::SEVERITY_SUCCESS,
-                    __(
-                        'The old T&C Connector has been deleted successfully.',
-                        'legal-texts-connector-it-recht-kanzlei'
-                    ),
-                    true
-                );
-            } elseif (filter_input(INPUT_POST, 'keep', FILTER_SANITIZE_STRING)) {
-                Install::setStatus(Install::SETUP_COMPLETE);
-                $this->messages[] = new Message(
-                    Message::SEVERITY_WARNING,
-                    __(
-                        'Please note that the old T&C Connector and this plugin '
-                            .'cannot be used together, as conflicts may occur. '
-                            .'If you uninstall this plugin and reactivate the old '
-                            .'T&C Connector, you will have to set it up again.',
-                        'legal-texts-connector-it-recht-kanzlei'
-                    ),
-                    true
-                );
-            } else {
-                $this->messages[] = new Message(
-                    Message::SEVERITY_SUCCESS,
-                    __(
-                        'We have found settings of the old T&C Connector plugin and '
-                            .'successfully transferred them to this plugin. The old '
-                            .'plugin has been deactivated. Please check whether all '
-                            .'desired legal texts are correctly integrated. If '
-                            .'necessary, transfer the texts from the client portal '
-                            .'again. Please note that errors may occur when '
-                            .'reactivating the old plugin.',
-                        'legal-texts-connector-it-recht-kanzlei'
-                    ),
-                    true
-                );
-            }
-        }
+        return 'loginDialogView';
     }
 
     public function addActionLinks($links) {
@@ -84,7 +42,7 @@ class SettingsPage {
                 'legal-texts-connector-it-recht-kanzlei'
             )) . '</a>';
         $links[] =
-            '<a href="' . admin_url('options-general.php?page='.self::PAGE_SETTINGS.'&'.Plugin::PLUGIN_NAME.'-reset=true') . '" style="color:#900">' . esc_html(__(
+            '<a href="' . admin_url('options-general.php?page='.self::PAGE_SETTINGS.'&'.\LegalTextsConnector::PLUGIN_NAME.'-reset=true') . '" style="color:#900">' . esc_html(__(
                 'Reset Settings',
                 'legal-texts-connector-it-recht-kanzlei'
             )) . '</a>';
@@ -92,7 +50,12 @@ class SettingsPage {
     }
 
     public function loginDialogAction() {
-        if (!wp_verify_nonce($_REQUEST['nonce'], Plugin::PLUGIN_NAME.'-action-login')) {
+        if (!isset($_REQUEST['nonce'])
+            || !wp_verify_nonce(
+                    sanitize_text_field(wp_unslash($_REQUEST['nonce'])),
+                    \LegalTextsConnector::PLUGIN_NAME.'-action-login'
+            )
+        ) {
             wp_send_json([
                 'status-code' => -1,
                 'status' => 'error',
@@ -111,11 +74,17 @@ class SettingsPage {
 
         $data = [
             'email'    => isset($_POST['itrk-email']) ? sanitize_email($_POST['itrk-email']) : '',
-            'password' => isset($_POST['itrk-password']) ? wp_unslash($_POST['itrk-password']) : '',
+            // Please notice that the password is explicitly allowed to contain any combinations of characters,
+            // even ones considered harmful like "Robert'); DROP TABLE Students; --" (https://xkcd.com/327/)
+            // The password is sent to an external service and validated there.
+            'password' => isset($_POST['itrk-password']) ? wp_unslash($_POST['itrk-password']) : '', // @Review Team: See comment above.
             'token'    => get_option(Plugin::OPTION_USER_AUTH_TOKEN),
             'apiUrl'   => home_url(),
             'sid'      => isset($_POST['itrk-sid']) ? (int)$_POST['itrk-sid'] : '',
         ];
+        if (($trinityBrand = Plugin::getTrinityBrand()) && !empty($trinityBrand)) {
+            $data['trinity'] = $trinityBrand;
+        }
 
         $url = Plugin::BACKEND_URL . 'shop-apps-api/Wordpress/install.php';
         $response = wp_remote_post($url, ['body' => $data]);
@@ -153,7 +122,6 @@ class SettingsPage {
             if (isset($json['sid']) && isset($json['interfaceId'])) {
                 update_option(Plugin::OPTION_SID, $json['sid']);
                 update_option(Plugin::OPTION_INTERFACE_ID, $json['interfaceId']);
-                Install::setStatus(Install::SETUP_COMPLETE);
             } else {
                 $json['status'] = 'error';
                 $json['error-code'] = 'INVALID_RESPONSE';
@@ -174,21 +142,54 @@ class SettingsPage {
         wp_die();
     }
 
+    private function enqueueLoginDialogScripts() {
+        wp_enqueue_script(
+            \LegalTextsConnector::PLUGIN_NAME,
+            plugins_url('/assets/js/login.js', __DIR__),
+            [],
+            \LegalTextsConnector::VERSION
+        );
+        wp_add_inline_script(
+            \LegalTextsConnector::PLUGIN_NAME,
+            'const ITRK_LOGIN_MESSAGES = ' . wp_json_encode([
+                'UNKNOWN' => __('An unknown error occurred.', 'legal-texts-connector-it-recht-kanzlei'),
+                'CONNECTION' => __('A connection to the server of IT-Recht Kanzlei could not be established. Error Details:', 'legal-texts-connector-it-recht-kanzlei'),
+                'INVALID_PARAMETERS' => __('Your provided credentials are incomplete.', 'legal-texts-connector-it-recht-kanzlei'),
+                'INVALID_CREDENTIALS' => __('Your provided credentials are invalid.', 'legal-texts-connector-it-recht-kanzlei'),
+                'MISSING_IMPRINTS' => __('You do not have any imprints configured. Please log into the Client Portal of IT-Recht Kanzlei.', 'legal-texts-connector-it-recht-kanzlei'),
+                'IMPRINT_INACTIVE' => __('The selected imprint is not active anymore. Please reload the page and repeat the process.', 'legal-texts-connector-it-recht-kanzlei'),
+            ]),
+            'before'
+        );
+    }
+
     public function loginDialogView() {
         require(__DIR__ . '/views/messages.php');
         require(__DIR__ . '/views/login.php');
     }
 
+    private function enqueueSettingsPageScripts() {
+        wp_enqueue_script(
+            \LegalTextsConnector::PLUGIN_NAME,
+            plugins_url('/assets/js/settings-page.js', __DIR__),
+            [],
+            \LegalTextsConnector::VERSION
+        );
+    }
+
     public function settingsPageView() {
         if (isset($_POST['document_id'])
-            && preg_match('/^'.Plugin::OPTION_DOC_PREFIX.'[a-z]{2}_[A-Z]{2}_[a-z]+$/', $_POST['document_id'])
+            // Please note that the regex validates the value of $_POST['document_id'].
+            // It is therefore safe to use as the value cannot contain anything that could trigger an exploit.
+            && preg_match('/^'.Plugin::OPTION_DOC_PREFIX.'[a-z]{2}_[A-Z]{2}_[a-z]+$/', $_POST['document_id']) // @Review Team: See comment above.
         ) {
-            $document = get_option($_POST['document_id']);
+            $documentId = $_POST['document_id']; // @Review Team: Validated using the regex above.
+            $document = get_option($documentId);
             $documentPath = $document->getFile();
-            if ( file_exists($documentPath) ) {
+            if (file_exists($documentPath)) {
                 unlink($documentPath);
             }
-            delete_option( $_POST['document_id'] );
+            delete_option($documentId);
 
             $this->messages[] = new Message(
                 Message::SEVERITY_SUCCESS,
@@ -217,11 +218,16 @@ class SettingsPage {
         $session = array_replace(['itrk_session_name' => '', 'itrk_session_id' => ''], $session);
 
         require(__DIR__ . '/views/messages.php');
-        if (Install::isStatus(Install::SETUP_CONVERTED)) {
-            require(__DIR__ . '/views/uninstall-old-plugin.php');
-        }
         require(__DIR__ . '/views/settings-header.php');
         require(__DIR__ . '/views/settings-page.php');
+
+        if (!empty(Plugin::getTrinityBrand())
+            && ($infotext = apply_filters('trinity_itrk_settings_page_help_text', null))
+            && is_string($infotext)
+            && !empty($infotext)
+        ) {
+            require(__DIR__ . '/views/settings-infotext.php');
+        }
     }
 
 }

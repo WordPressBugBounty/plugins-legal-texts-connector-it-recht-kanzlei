@@ -14,7 +14,7 @@
 /** UI Components */
 div.itrk-card {
     font-size: 16px;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 35px;
     box-sizing: border-box;
     position: relative;
@@ -26,28 +26,36 @@ div.itrk-card {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
     border: 1px solid rgba(0, 0, 0, 0.12);
 }
+div.itrk-card h1,
+div.itrk-card h2,
+div.itrk-card h3,
+div.itrk-card h4,
+div.itrk-card h5,
+div.itrk-card h6 {
+    font-family: Bitter;
+    color: #333;
+}
+div.itrk-card h1,
+div.itrk-card h2,
+div.itrk-card h3 {
+    font-weight: 500;
+    text-transform: uppercase;
+}
+div.itrk-card h1 {
+    font-size: 22px;
+}
+div.itrk-card h2 {
+    font-size: 19px;
+}
+div.itrk-card h3 {
+    font-size: 17px;
+}
+div.itrk-card p {
+    font-size: 16px;
+}
 div.itrk-card input,
 div.itrk-card button {
     font-size: 16px;
-}
-div.itrk-card h3 {
-    color: #595857;
-    text-transform: uppercase;
-    margin-top: 0;
-    margin-bottom: 5px;
-}
-div.itrk-card h4 {
-    font-family: Bitter;
-    font-size: 19px;
-    font-weight: 500;
-    text-transform: uppercase;
-    display: flex;
-    margin: 10px 0;
-    color: #333;
-    align-items: center;
-}
-div.itrk-card h4 span {
-    width: 450px;
 }
 .itrk-card div.itrk-divider {
     height: 1px;
@@ -419,6 +427,10 @@ div.itrk-grid-row:not(:first-of-type) {
         border-bottom: none;
         padding-bottom: 0px;
     }
+    .itrk-admin-trinity .itrk-card.itrk-document .itrk-grid-row {
+        grid-template-columns: 30% 30% 40%;
+    }
+
     .itrk-card.itrk-document .itrk-document-row.itrk-grid-row > * {
         margin-top: 0px;
     }

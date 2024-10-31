@@ -2,14 +2,13 @@
 Contributors: itrechtkanzlei
 Tags: Rechtstexte, AGB, Impressum, Datenschutz, abmahnsicher
 Requires at least: 4.4
-Tested up to: 6.5
+Tested up to: 6.7
 Requires PHP: 7.1
-Stable tag: 1.0.8
+Stable tag: 1.0.10
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Ensures your website is always up-to-date with legal texts from the IT law firm that are safe from legal notices after booking the GTC service and a one-time setup.
-
+Ensures that your website is always provided with warning-proof legal texts from IT-Recht Kanzlei after booking the GTC service.
 
 == Description ==
 Via the **Legal Text Connector of the IT-Recht Kanzlei**, your legal texts are automatically transferred from the client portal to your website.
@@ -60,7 +59,7 @@ No. The transfer of legal texts to your WordPress presence including automatic u
 Yes. The plugin supports both types without restrictions. After installation, only the short codes of the desired legal texts that are on the plugin settings page must be integrated and saved on the corresponding page(s) of your WordPress installation.
 
 = Attaching legal texts to WooCommerce emails =
-For orders placed in a WooCommerce shop, the necessary legal texts are automatically attached to the order confirmations in the corresponding language. No further setup is required by you. 
+For orders placed in a WooCommerce shop, the necessary legal texts are automatically attached to the order confirmations in the corresponding language. No further setup is required by you.
 
 
 == Screenshots ==
@@ -72,6 +71,14 @@ For orders placed in a WooCommerce shop, the necessary legal texts are automatic
 
 
 == Changelog ==
+= Version 1.0.10 =
+* Minor corrections as part of the WP review process
+
+= Version 1.0.9 =
+* The migration helper for the predecessor of this plugin has been removed
+* Fixed minor spelling mistakes
+* Tested up to WP 6.7
+
 = Version 1.0.8 =
 * Error correction
 

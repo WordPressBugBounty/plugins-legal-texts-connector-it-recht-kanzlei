@@ -64,8 +64,13 @@ class ItrkLtiHandler extends \ITRechtKanzlei\LTIHandler {
             new \DateTime()
         );
 
+        $documentUpdated = apply_filters('itrk_process_received_document', $document);
+        if ($documentUpdated instanceof Document) {
+            $document = $documentUpdated;
+        }
+
         // Since the option contains a timestamp update_option() will always try to update the option.
-        // If the function returns false an error occured.
+        // If the function returns false an error occurred.
         $lastDbError = $wpdb->last_error;
         if (!update_option($document->getIdentifier(), $document)) {
             $error = new \ITRechtKanzlei\LTIError(
@@ -116,7 +121,7 @@ class ItrkLtiHandler extends \ITRechtKanzlei\LTIHandler {
         }
 
         $targetUrl = '';
-        $postId = ShortCodes::getPageIdForShortCode(ShortCodes::getShortCodeForDocument($document));
+        $postId = ShortCodes::getPageIdForShortCode($document->getShortCode());
         if ($postId > 0) {
             $targetUrl = (string)get_permalink($postId);
 

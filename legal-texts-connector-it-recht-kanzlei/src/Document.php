@@ -81,4 +81,9 @@ class Document {
     public function getFile(): string {
         return self::getFilePath($this->getLanguage(), $this->getCountry(), $this->getType());
     }
+
+    public  function getShortCode() {
+        return ShortCodes::createShortCode($this->getType(), $this->getLanguage(), $this->getCountry());
+    }
+
 }

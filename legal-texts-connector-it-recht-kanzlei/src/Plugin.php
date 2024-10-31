@@ -5,14 +5,11 @@ require_once __DIR__ . '/sdk/LTI.php';
 require_once __DIR__ . '/ItrkLtiHandler.php';
 
 class Plugin {
-    const PLUGIN_NAME    = 'legal-texts-connector-it-recht-kanzlei';
-
-    const OPTION_PREFIX             = 'itrk_lti_';
-    const OPTION_DOC_PREFIX         = 'itrk_lti_doc_';
-    const OPTION_USER_AUTH_TOKEN    = 'itrk_lti_auth_token';
-    const OPTION_SETUP_STATUS       = 'itrk_lti_setup_status';
-    const OPTION_SID                = 'itrk_lti_sid';
-    const OPTION_INTERFACE_ID       = 'itrk_lti_interface_id';
+    const OPTION_PREFIX          = 'itrk_lti_';
+    const OPTION_DOC_PREFIX      = 'itrk_lti_doc_';
+    const OPTION_USER_AUTH_TOKEN = 'itrk_lti_auth_token';
+    const OPTION_SID             = 'itrk_lti_sid';
+    const OPTION_INTERFACE_ID    = 'itrk_lti_interface_id';
 
     const BACKEND_URL = ITRK_SERVICE_URL;
     const TARGET_PAGE = '/Portal/schnittstelle_ansicht.php?iid=%d';
@@ -23,16 +20,16 @@ class Plugin {
 
         // Reset all settings.
         if ($pluginIsOpen
-            && isset($_GET[self::PLUGIN_NAME.'-reset']) && ($_GET[self::PLUGIN_NAME.'-reset'] === 'true')
+            && isset($_GET[\LegalTextsConnector::PLUGIN_NAME.'-reset']) && ($_GET[\LegalTextsConnector::PLUGIN_NAME.'-reset'] === 'true')
         ) {
-            Install::cleanPluginConfigs();
+            self::cleanPluginConfigs();
             $url = add_query_arg(['page' => SettingsPage::PAGE_SETTINGS], admin_url('options-general.php'));
             if (wp_redirect($url)) {
                 exit;
             }
         }
 
-        if (Install::isSetup()) {
+        if (self::isSetup()) {
             require_once __DIR__ . '/MailAttachmentHandler.php';
             new MailAttachmentHandler();
             new ShortCodes();
@@ -42,27 +39,45 @@ class Plugin {
             return;
         }
 
-        if ($pluginIsOpen) {
-            add_action('admin_enqueue_scripts', function () {
-                wp_enqueue_style(
-                    'legal-texts-connector-it-recht-kanzlei',
-                    plugins_url('/assets/css/styles.css', __DIR__),
-                    [],
-                    \LegalTextsConnector::VERSION,
-                    'all'
-                );
-            });
-        }
-
         $settingsPage = new SettingsPage();
+        if (!self::isSetup()) {
+            add_action('wp_ajax_'.\LegalTextsConnector::PLUGIN_NAME.'-login', [$settingsPage, 'loginDialogAction']);
+        }
         add_action('admin_menu', [$settingsPage, 'addMenu']);
         add_filter(
             'plugin_action_links_' . plugin_basename(dirname(__DIR__) . '/legal-texts-connector-it-recht-kanzlei.php'),
             [$settingsPage, 'addActionLinks']
         );
-        if (!Install::isSetup()) {
-            add_action('wp_ajax_'.Plugin::PLUGIN_NAME.'-login', [$settingsPage, 'loginDialogAction']);
+
+        if ($pluginIsOpen) {
+            add_action('admin_enqueue_scripts', function () use ($settingsPage) {
+                wp_enqueue_style(
+                    \LegalTextsConnector::PLUGIN_NAME,
+                    plugins_url('/assets/css/styles.css', __DIR__),
+                    [],
+                    \LegalTextsConnector::VERSION,
+                    'all'
+                );
+                $settingsPage->enqueueScripts();
+            });
+            add_filter('admin_body_class', function ($classes) {
+                return $classes.' itrk-admin-page'.
+                    (($brand = self::getTrinityBrand())
+                        ? (' itrk-admin-trinity itrk-admin-triniry-'.$brand)
+                        : ''
+                    );
+            });
         }
+    }
+
+    /** @return ?string */
+    public static function getTrinityBrand() {
+        static $trinityBrand = false;
+        if ($trinityBrand === false) {
+            $brand = apply_filters('trinity_itrk_brand', null);
+            $trinityBrand = (is_string($brand) && !empty($brand)) ? $brand : null;
+        }
+        return $trinityBrand;
     }
 
     public static function getAvailableDocuments($type = null) {
@@ -132,7 +147,8 @@ class Plugin {
         return $c[$iso] ?? $iso;
     }
 
-    public static function getSupportedDocumentTypes() {
+    public static function getSupportedDocumentTypes(): array
+    {
         return [
             'agb'         => __('Terms and Conditions', 'legal-texts-connector-it-recht-kanzlei'),
             'datenschutz' => __('Privacy', 'legal-texts-connector-it-recht-kanzlei'),
@@ -146,4 +162,23 @@ class Plugin {
         return $t[$type] ?? $type;
     }
 
+    public static function isSetup() {
+        static $isSetup = null;
+        if ($isSetup === null) {
+            $isSetup = ($token = get_option(self::OPTION_USER_AUTH_TOKEN))
+                && is_string($token)
+                && !empty($token)
+                && ((int)get_option(self::OPTION_INTERFACE_ID) > 0)
+            ;
+        }
+        return $isSetup;
+    }
+
+    public static function cleanPluginConfigs() {
+        foreach (wp_load_alloptions(true) as $key => $void) {
+            if (strpos($key, Plugin::OPTION_PREFIX) === 0) {
+                delete_option($key);
+            }
+        }
+    }
 }

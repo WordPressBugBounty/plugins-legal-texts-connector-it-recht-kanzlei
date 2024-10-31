@@ -1,5 +1,7 @@
 <?php
 use ITRechtKanzlei\LegalTextsConnector\Plugin;
+
+if (!defined('ABSPATH')) exit;
 ?>
 <?php if (in_array(ini_get('display_errors'), ['On', 'on', '1', 1])) { ?>
 	<div class="notice notice-error is-dismissible"><p>
