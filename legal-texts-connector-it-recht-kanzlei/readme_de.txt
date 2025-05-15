@@ -2,9 +2,9 @@
 Contributors: itrechtkanzlei
 Tags: Rechtstexte, AGB, Impressum, Datenschutz, abmahnsicher
 Requires at least: 4.4
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 7.1
-Stable tag: 1.0.10
+Stable tag: 1.0.11
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -46,8 +46,6 @@ Die "IT-Recht Kanzlei München" steht gerne für Fragen unter +49 89 13014330 od
 Navigieren Sie im WordPress Admin Bereich auf *Plugins => Neu hinzufügen*. Suchen Sie nach der **Rechtstexte-Schnittstelle der IT-Recht Kanzlei**. Klicken Sie auf *Jetzt installieren* und anschließend auf *Aktivieren*. Bitte beachten Sie, um das Plugin nutzen zu können benötigen Sie einen Zugang zum Mandantenportal der "IT-Recht Kanzlei München".
 
 Wenn Sie bereits Mandant sind und noch keine AGB-Schnittstelle zu Wordpress eingerichtet haben, brauchen Sie sich nach der Aktivierung des Plugins nur mit Ihren Zugangsdaten zum Mandantenportal in der dann sichtbaren Login-Maske anmelden und Ihre Verbindung wird automatisch eingerichtet.
-
-Falls Sie bereits das Plugin **AGB-Connector der IT-Recht Kanzlei** einsetzen, werden alle Konfigurationen des Plugins automatisch auf dieses Plugin übernommen.
 
 
 == Frequently Asked Questions ==

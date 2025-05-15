@@ -2,6 +2,7 @@
 use ITRechtKanzlei\LegalTextsConnector\Plugin;
 
 if (!defined('ABSPATH')) exit;
+
 ?>
 <?php if (in_array(ini_get('display_errors'), ['On', 'on', '1', 1])) { ?>
 	<div class="notice notice-error is-dismissible"><p>
@@ -64,7 +65,9 @@ if (class_exists(\WooCommerce_Germanized_Pro::class) && ($wgpStaticTerms || $wgp
 	</div>
 	<div class="itrk-buttons-block">
 		<form method="post" target="_blank" action="<?php echo esc_url(sprintf('%s%s', Plugin::BACKEND_URL, 'shop-apps-api/logon.php')); ?>">
+			<?php if (empty(Plugin::getTrinityBrand())) { ?>
 			<a target="_blank" href="https://www.it-recht-kanzlei.de/wordpress-schritt-fuer-schritt-anleitung.html" class="itrk-button invert"><?php esc_html_e('Step by step guide', 'legal-texts-connector-it-recht-kanzlei') ?></a>
+			<?php } ?>
 			<input type="submit" name="redirect" class="itrk-button" value="<?php echo esc_html_e('Assign documents', 'legal-texts-connector-it-recht-kanzlei') ?>">
 			<input type="hidden" name="sessionName" value="<?php echo esc_attr($session['itrk_session_name']); ?>">
 			<input type="hidden" name="sessionId" value="<?php echo esc_attr($session['itrk_session_id']); ?>">

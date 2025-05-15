@@ -12,22 +12,34 @@ class ShortCodes {
     }
 
     public static function settings() {
+        // display_always = true: This section will always be shown in the list
+        //     of available legal texts.
+        // display_always = false: This section will only be shown if a legal text
+        //     of the corresponding type has been transferred to the plugin.
+        //     In case the plugin WooCommerce is installed all sections will be
+        //     shown, regardless if a legal text of the corresponding type has
+        //     been transferred or not.
+        $displayAnyways = class_exists(\WC_Order::class);
         return (array)apply_filters('agb_shortcodes', [
             'agb_imprint' => [
                 'name' => Plugin::getDocumentName('impressum'),
                 'setting_key' => 'impressum',
+                'display_always' => true,
             ],
             'agb_terms' => [
                 'name' => Plugin::getDocumentName('agb'),
                 'setting_key' => 'agb',
+                'display_always' => $displayAnyways,
             ],
             'agb_privacy' => [
                 'name' => Plugin::getDocumentName('datenschutz'),
                 'setting_key' => 'datenschutz',
+                'display_always' => true,
             ],
             'agb_revocation' => [
                 'name' => Plugin::getDocumentName('widerruf'),
                 'setting_key' => 'widerruf',
+                'display_always' => $displayAnyways,
             ],
         ]);
     }
@@ -77,10 +89,17 @@ class ShortCodes {
         $document = get_option(Document::createIdentifier($setting['setting_key'], $attr['language'], $attr['country']), null);
 
         if (!$document) {
-            $documentContent = esc_html(__(
-                'Please use the copy function to the right of the shortcodes in the plugin and paste it here. Make sure you select the correct language.',
-                'legal-texts-connector-it-recht-kanzlei'
-            ));
+            $documentContent = esc_html(
+                empty(Plugin::getTrinityBrand())
+                    ? __(
+                        'Please use the copy function to the right of the shortcodes in the plugin and paste it here. Make sure you select the correct language.',
+                        'legal-texts-connector-it-recht-kanzlei'
+                    )
+                    : __(
+                        'Please configure the legal text app under “Apps” in the dashboard to display this content correctly.',
+                        'legal-texts-connector-it-recht-kanzlei'
+                    )
+            );
         } else {
             $array = [
                 '<p>['       => '[',

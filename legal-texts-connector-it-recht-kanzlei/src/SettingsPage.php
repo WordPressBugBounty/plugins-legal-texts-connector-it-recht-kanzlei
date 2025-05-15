@@ -7,7 +7,7 @@ require_once __DIR__ . '/Message.php';
 class SettingsPage {
     const PAGE_SETTINGS = 'legal_texts_connector_settings';
 
-    /** @var Messages[] */
+    /** @var Message[] */
     private $messages = [];
 
     public function addMenu() {
@@ -52,8 +52,8 @@ class SettingsPage {
     public function loginDialogAction() {
         if (!isset($_REQUEST['nonce'])
             || !wp_verify_nonce(
-                    sanitize_text_field(wp_unslash($_REQUEST['nonce'])),
-                    \LegalTextsConnector::PLUGIN_NAME.'-action-login'
+                sanitize_text_field(wp_unslash($_REQUEST['nonce'])),
+                \LegalTextsConnector::PLUGIN_NAME.'-action-login'
             )
         ) {
             wp_send_json([
@@ -66,9 +66,11 @@ class SettingsPage {
         }
 
         if (empty(get_option(Plugin::OPTION_USER_AUTH_TOKEN))) {
-            add_option(
+            require_once __DIR__ . '/sdk/require_all.php';
+            update_option(
                 Plugin::OPTION_USER_AUTH_TOKEN,
-                md5(wp_generate_password(32, true, true))
+                \ITRechtKanzlei\LTI::generateToken(),
+                false
             );
         }
 
@@ -84,6 +86,9 @@ class SettingsPage {
         ];
         if (($trinityBrand = Plugin::getTrinityBrand()) && !empty($trinityBrand)) {
             $data['trinity'] = $trinityBrand;
+        }
+        if (!empty($trinityDomain = get_option('gox_product_domain')) && is_string($trinityDomain)) {
+            $data['trinityDomain'] = $trinityDomain;
         }
 
         $url = Plugin::BACKEND_URL . 'shop-apps-api/Wordpress/install.php';
@@ -120,8 +125,8 @@ class SettingsPage {
 
         if (($json['status'] === 'success') && ($json['status-code'] == 200)) {
             if (isset($json['sid']) && isset($json['interfaceId'])) {
-                update_option(Plugin::OPTION_SID, $json['sid']);
-                update_option(Plugin::OPTION_INTERFACE_ID, $json['interfaceId']);
+                update_option(Plugin::OPTION_SID, $json['sid'], false);
+                update_option(Plugin::OPTION_INTERFACE_ID, $json['interfaceId'], false);
             } else {
                 $json['status'] = 'error';
                 $json['error-code'] = 'INVALID_RESPONSE';
@@ -164,8 +169,10 @@ class SettingsPage {
     }
 
     public function loginDialogView() {
+        require(__DIR__ . '/views/page-top.php');
         require(__DIR__ . '/views/messages.php');
         require(__DIR__ . '/views/login.php');
+        require(__DIR__ . '/views/page-bottom.php');
     }
 
     private function enqueueSettingsPageScripts() {
@@ -217,6 +224,7 @@ class SettingsPage {
         }
         $session = array_replace(['itrk_session_name' => '', 'itrk_session_id' => ''], $session);
 
+        require(__DIR__ . '/views/page-top.php');
         require(__DIR__ . '/views/messages.php');
         require(__DIR__ . '/views/settings-header.php');
         require(__DIR__ . '/views/settings-page.php');
@@ -228,6 +236,7 @@ class SettingsPage {
         ) {
             require(__DIR__ . '/views/settings-infotext.php');
         }
+        require(__DIR__ . '/views/page-bottom.php');
     }
 
 }

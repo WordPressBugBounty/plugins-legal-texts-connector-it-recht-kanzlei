@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) exit;
 >
     <div id="itrk-kanzlei-logo"></div>
     <div class="itrk-divider"></div>
-    <h2><?php esc_html_e('In a few steps to legal texts on this Wordpress installation that are safe from warning letters', 'legal-texts-connector-it-recht-kanzlei'); ?></h2>
+    <h2><?php esc_html_e('In a few steps to legal texts that are safe from warning letters', 'legal-texts-connector-it-recht-kanzlei'); ?></h2>
     <?php if (empty(Plugin::getTrinityBrand())) { ?>
     <p><strong><?php esc_html_e('Note:', 'legal-texts-connector-it-recht-kanzlei'); ?></strong> <?php esc_html_e('Prerequisite for the use of plugins is the booking of the AGB service of IT-Recht Kanzlei.', 'legal-texts-connector-it-recht-kanzlei'); ?></p>
     <p><strong><a target="_blank" href="https://www.it-recht-kanzlei.de/schutzpakete.html?pid=5"><?php esc_html_e('If necessary, you can book this service here.', 'legal-texts-connector-it-recht-kanzlei'); ?></a></strong></p>

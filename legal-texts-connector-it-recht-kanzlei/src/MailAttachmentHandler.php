@@ -45,13 +45,8 @@ class MailAttachmentHandler {
         return null;
     }
 
-    private function getEmailAttachmentDocument(string $type, string $locale): ?string {
-        $documents = [];
-        foreach (Plugin::getAvailableDocuments($type) as $serDoc) {
-            try {
-                $documents[] = Helper::unserializeWithException($serDoc, ['Document' => false]);
-            } catch (\RuntimeException $e) {}
-        }
+    public function getEmailAttachmentDocument(string $type, string $locale): ?string {
+        $documents = Plugin::getAvailableDocuments($type);
 
         list($language, $country) = explode('-', $locale, 2);
         list($wpLanguage, $wpCountry) = explode('-', get_bloginfo('language'), 2);
@@ -77,6 +72,7 @@ class MailAttachmentHandler {
         if (!is_array($params) || !isset($params[4])
             || !($wcMail instanceof \WC_Email) || !($wcMail->object instanceof \WC_Order)
             || !in_array($wcMail->id, [
+                    'customer_on_hold_order',
                     'customer_processing_order',
                     'customer_invoice',
                 ], true)
@@ -93,8 +89,14 @@ class MailAttachmentHandler {
         }
 
         $locale = $wcMail->object->get_meta(self::META_KEY_ORDER_LOCALE);
-        $termsAndConditions = $attachTC ? $this->getEmailAttachmentDocument('agb', $locale) : null;
-        $privacyPolicy      = $attachRefund ? $this->getEmailAttachmentDocument('widerruf', $locale) : null;
+        $termsAndConditions = apply_filters(
+            'itrk_legal_texts_mail_terms_and_conditions_attachment',
+            $attachTC ? $this->getEmailAttachmentDocument('agb', $locale) : null
+        );
+        $privacyPolicy = apply_filters(
+            'itrk_legal_texts_mail_privacy_policy_attachment',
+            $attachRefund ? $this->getEmailAttachmentDocument('widerruf', $locale) : null
+        );
 
         if ($termsAndConditions && file_exists($termsAndConditions)) {
             $params[4][] = $termsAndConditions;
@@ -103,6 +105,7 @@ class MailAttachmentHandler {
         if ($privacyPolicy && file_exists($privacyPolicy)) {
             $params[4][] = $privacyPolicy;
         }
+
         return $params;
     }
 

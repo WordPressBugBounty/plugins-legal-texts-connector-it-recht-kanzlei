@@ -2,6 +2,7 @@
 namespace ITRechtKanzlei\LegalTextsConnector;
 
 require_once __DIR__ . '/sdk/LTI.php';
+require_once __DIR__ . '/sdk/LTIPushData.php';
 require_once __DIR__ . '/ItrkLtiHandler.php';
 
 class Plugin {
@@ -81,15 +82,18 @@ class Plugin {
     }
 
     public static function getAvailableDocuments($type = null) {
-        $r = array_filter(
-            wp_load_alloptions(),
-            function ($k) use ($type) {
-                return (strpos($k, self::OPTION_DOC_PREFIX) === 0)
-                    && (!$type || (strpos($k, $type) !== false));
-            },
-            ARRAY_FILTER_USE_KEY
-        );
-        ksort($r);
+        global $wpdb;
+        if (!in_array($type, \ITRechtKanzlei\LTIPushData::ALLOWED_DOCUMENT_TYPES)) {
+            return [];
+        }
+        $result = $wpdb->get_col($wpdb->prepare(
+            "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s ORDER BY option_name",
+            $wpdb->esc_like(self::OPTION_DOC_PREFIX) . '%' . $wpdb->esc_like($type)
+        ));
+        $r = [];
+        foreach ($result as $optionName) {
+            $r[$optionName] = get_option($optionName);
+        }
         return $r;
     }
 
@@ -175,10 +179,10 @@ class Plugin {
     }
 
     public static function cleanPluginConfigs() {
-        foreach (wp_load_alloptions(true) as $key => $void) {
-            if (strpos($key, Plugin::OPTION_PREFIX) === 0) {
-                delete_option($key);
-            }
-        }
+        global $wpdb;
+        $wpdb->query($wpdb->prepare(
+            "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s",
+            $wpdb->esc_like(self::OPTION_PREFIX) . '%'
+        ));
     }
 }

@@ -7,16 +7,16 @@
  * Author: IT-Recht Kanzlei
  * Author URI: https://www.it-recht-kanzlei.de/
  * Text Domain: legal-texts-connector-it-recht-kanzlei
- * Version: 1.0.10
- * Stable tag: 1.0.10
+ * Version: 1.0.11
+ * Stable tag: 1.0.11
  * Requires at least: 4.4
- * Tested up to: 6.7
+ * Tested up to: 6.8
  * Requires PHP: 7.1
  * License: GPLv3 or later
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */
 class LegalTextsConnector {
-    const VERSION = '1.0.10';
+    const VERSION = '1.0.11';
     const PLUGIN_NAME  = 'legal-texts-connector-it-recht-kanzlei';
 
     public function __construct() {
@@ -40,7 +40,11 @@ class LegalTextsConnector {
         });
 
         add_action('activated_plugin', function ($pluginFile, $network_activation) {
-            if ($pluginFile != 'legal-texts-connector-it-recht-kanzlei/legal-texts-connector-it-recht-kanzlei.php') {
+            // Do not redirect if the plugin is being activated using the rest api.
+            if (defined('REST_REQUEST') && REST_REQUEST) {
+                return;
+            }
+            if ($pluginFile != self::PLUGIN_NAME.'/'.self::PLUGIN_NAME.'.php') {
                 return;
             }
             self::includeRequirements();
@@ -52,8 +56,18 @@ class LegalTextsConnector {
         }, 10, 2);
 
         add_action('init', function () {
-            load_plugin_textdomain('legal-texts-connector-it-recht-kanzlei', false, plugin_basename(__DIR__).'/languages');
+            load_plugin_textdomain(self::PLUGIN_NAME, false, plugin_basename(__DIR__).'/languages');
         });
+
+        if (defined('ITRK_SERVICE_URL')) {
+            // Local development environment. Load the local language files instead.
+            add_filter('load_textdomain_mofile', function ($mofile, $domain) {
+                if ($domain !== self::PLUGIN_NAME) {
+                    return $mofile;
+                }
+                return WP_PLUGIN_DIR.'/'.plugin_basename(__DIR__).'/languages/'.self::PLUGIN_NAME.'-'.get_locale().'.mo';
+            }, 10, 2);
+        }
     }
 
     private function includeRequirements() {

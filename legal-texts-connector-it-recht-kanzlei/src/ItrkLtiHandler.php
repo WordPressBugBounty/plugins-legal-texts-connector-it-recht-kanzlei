@@ -70,9 +70,10 @@ class ItrkLtiHandler extends \ITRechtKanzlei\LTIHandler {
         }
 
         // Since the option contains a timestamp update_option() will always try to update the option.
+        // Set autoload to false because autoloading the legal texts can slow down WP as the texts can be pretty large.
         // If the function returns false an error occurred.
         $lastDbError = $wpdb->last_error;
-        if (!update_option($document->getIdentifier(), $document)) {
+        if (!update_option($document->getIdentifier(), $document, false)) {
             $error = new \ITRechtKanzlei\LTIError(
                 __('The legal text could not be stored in the database.', 'legal-texts-connector-it-recht-kanzlei'),
                 \ITRechtKanzlei\LTIError::SAVE_DOCUMENT_ERROR

@@ -2,9 +2,9 @@
 Contributors: itrechtkanzlei
 Tags: Rechtstexte, AGB, Impressum, Datenschutz, abmahnsicher
 Requires at least: 4.4
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 7.1
-Stable tag: 1.0.10
+Stable tag: 1.0.11
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -46,8 +46,6 @@ Navigate in the WordPress admin area to *Plugins => Add New*. Search for the **L
 
 If you are already a client and have not yet set up a Terms and Conditions interface with WordPress, after activating the plugin, you only need to log in with your access data related to the client portal using the login screen that is then displayed and your connection will be set up automatically.
 
-If you already use the plugin **Terms & Conditions Connector of IT-Recht Kanzlei**, all configurations of the plugin will automatically be transferred to this plugin.
-
 
 == Frequently Asked Questions ==
 Here you will find answers to frequently asked questions about this plugin.
@@ -71,6 +69,11 @@ For orders placed in a WooCommerce shop, the necessary legal texts are automatic
 
 
 == Changelog ==
+= Version 1.0.11 =
+* No longer load legal texts per autoload option
+* Bugfix for loading the file system layer
+* Tested up to WP 6.8
+
 = Version 1.0.10 =
 * Minor corrections as part of the WP review process
 
@@ -85,12 +88,12 @@ For orders placed in a WooCommerce shop, the necessary legal texts are automatic
 = Version 1.0.7 =
 * Support for the "Germanized for WooCommerce Pro" plugin when sending order confirmation emails
 * The legal text PDFs are no longer attached twice
-* Tessted up to WP 6.4
+* Tested up to WP 6.4
 
 = Version 1.0.6 =
 * Always show all buttons, but disable the ones that cannot be used
-* Internal optimisations
-* Tessted up to WP 6.3
+* Internal optimizations
+* Tested up to WP 6.3
 
 = Version 1.0.5 =
 * A legal text can be deleted once it is no longer in use

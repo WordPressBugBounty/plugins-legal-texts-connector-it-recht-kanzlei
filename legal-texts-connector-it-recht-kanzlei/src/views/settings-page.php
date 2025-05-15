@@ -1,6 +1,4 @@
 <?php
-use ITRechtKanzlei\LegalTextsConnector\Helper;
-use ITRechtKanzlei\LegalTextsConnector\Message;
 use ITRechtKanzlei\LegalTextsConnector\Plugin;
 use ITRechtKanzlei\LegalTextsConnector\SettingsPage;
 use ITRechtKanzlei\LegalTextsConnector\ShortCodes;
@@ -14,6 +12,9 @@ $tm = !empty(Plugin::getTrinityBrand());
 <?php
 foreach (ShortCodes::settings() as $tag => $sc) {
     $documents = Plugin::getAvailableDocuments($sc['setting_key']);
+    if (!$sc['display_always'] && empty($documents)) {
+        continue;
+    }
     ?>
     <div class="itrk-card itrk-document">
         <h2><?php echo esc_html($sc['name']); ?></h2>
@@ -53,32 +54,7 @@ foreach (ShortCodes::settings() as $tag => $sc) {
         </div>
         <div class="itrk-divider"></div>
     <?php
-    foreach ($documents as $k => $serdoc) {
-        try {
-            $document  = Helper::unserializeWithException($serdoc, ['Document' => false]);
-        } catch (\RuntimeException $e) {
-            $country = null;
-            $language = null;
-            $m = [];
-            if (preg_match('/([a-z]{2,3})_([A-Z]{2,3})_([^_]+)$/', $k, $m)) {
-                $language = Plugin::getLanguage($m[1]);
-                $country  = Plugin::getCountry($m[2]);
-            }
-            ?>
-            <div class="itrk-grid-row itrk-document-row">
-                <div><?php echo $country  ? esc_html($country)  : '&mdash;'; ?></div>
-                <div><?php echo $language ? esc_html($language) : '&mdash;'; ?></div>
-            <?php
-            echo (new Message(Message::SEVERITY_ERROR, __(
-                'The document is incomplete. Please transfer it again from the client portal. If the error persists, please contact the IT-Recht Kanzlei.',
-                'legal-texts-connector-it-recht-kanzlei'
-            )))->toHtml();
-            ?>
-            </div>
-            <?php
-            continue;
-        }
-
+    foreach ($documents as $k => $document) {
         $shortcode = $document->getShortCode();
         ?>
             <div class="itrk-grid-row itrk-document-row">

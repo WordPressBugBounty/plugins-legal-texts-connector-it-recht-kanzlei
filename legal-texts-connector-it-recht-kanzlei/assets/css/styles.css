@@ -233,6 +233,14 @@ form.itrk-inline-form {
     display: inline-block;
     margin: 0;
 }
+
+/** Main Layout */
+.itrk-admin-trinity .itrk-app {
+    margin: 20px 20px 0 20px;
+}
+
+
+/** WP Messages */
 body.settings_page_legal_texts_connector_settings div.notice {
     margin-top: 10px;
     margin-left: 0;

@@ -10,13 +10,13 @@ class Helper {
             require_once ABSPATH . '/wp-admin/includes/template.php';
         }
 
-        if ($wp_filesystem instanceof WP_Filesystem_Base) {
+        if ($wp_filesystem instanceof \WP_Filesystem_Base) {
             return $wp_filesystem;
         }
 
         ob_start();
         $credentials = request_filesystem_credentials('');
-        ob_clean();
+        ob_end_clean();
 
         if ($credentials === false) {
             $credentials = [];
@@ -45,29 +45,6 @@ class Helper {
         }
 
         return $wp_filesystem;
-    }
-
-    /**
-     * Like php unserialize but throws an Exception incase the data is corrupted.
-     * @see https://www.php.net/unserialize
-     * @param string $data
-     * @param array $options
-     * @return mixed
-     * @throws \RuntimeException
-     */
-    public static function unserializeWithException($data, array $options = []) {
-        if ($data === 'b:0;') {
-            return false;
-        }
-        $r = @unserialize($data, $options);
-        if ($r !== false) {
-            return $r;
-        }
-        $e = error_get_last();
-        if (!empty($e) && isset($e['file']) && ($e['file'] === __FILE__)) {
-            throw new \RuntimeException($e['message'], (int)$e['type']);
-        }
-        return $r;
     }
 
 }
