@@ -1,6 +1,6 @@
 <?php
 /**
- * The uninstall routine.
+ * The uninstallation routine.
  */
 if (!defined('WP_UNINSTALL_PLUGIN')) {
     die();
@@ -9,4 +9,4 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
 if (!class_exists('ITRechtKanzlei\LegalTextsConnector\Plugin')) {
     require_once __DIR__ . '/src/Plugin.php';
 }
-\ITRechtKanzlei\LegalTextsConnector\Plugin::cleanPluginConfigs();
+\ITRechtKanzlei\LegalText\Plugin\Wordpress\Plugin::cleanPluginConfigs();

@@ -1,5 +1,5 @@
 <?php
-namespace ITRechtKanzlei\LegalTextsConnector;
+namespace ITRechtKanzlei\LegalText\Plugin\Wordpress;
 
 class Message {
     const SEVERITY_INFO = 'info';

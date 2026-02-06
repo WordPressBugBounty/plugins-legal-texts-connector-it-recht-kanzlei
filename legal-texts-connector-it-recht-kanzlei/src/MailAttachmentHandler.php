@@ -1,5 +1,5 @@
 <?php
-namespace ITRechtKanzlei\LegalTextsConnector;
+namespace ITRechtKanzlei\LegalText\Plugin\Wordpress;
 
 require_once __DIR__ . '/sdk/LTI.php';
 require_once __DIR__ . '/Helper.php';
@@ -11,7 +11,11 @@ class MailAttachmentHandler {
 
     public function __construct() {
         // Disable automatic mail attachments if it is an absolute necessity.
-        if (defined('ITRK_DISABLE_MAIL_ATTACHMENTS') && (ITRK_DISABLE_MAIL_ATTACHMENTS === true)) {
+        if (
+            (defined('ITRK_LTI_DISABLE_MAIL_ATTACHMENTS') && (ITRK_LTI_DISABLE_MAIL_ATTACHMENTS === true))
+            // Deprecated. Legacy constant name.
+            || (defined('ITRK_DISABLE_MAIL_ATTACHMENTS') && (ITRK_DISABLE_MAIL_ATTACHMENTS === true))
+        ) {
             return;
         }
 

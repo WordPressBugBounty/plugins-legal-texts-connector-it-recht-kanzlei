@@ -1,5 +1,5 @@
 <?php
-namespace ITRechtKanzlei\LegalTextsConnector;
+namespace ITRechtKanzlei\LegalText\Plugin\Wordpress;
 
 class Helper {
     public static function getFs() {

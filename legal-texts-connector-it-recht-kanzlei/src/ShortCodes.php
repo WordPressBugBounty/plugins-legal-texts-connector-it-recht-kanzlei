@@ -1,5 +1,5 @@
 <?php
-namespace ITRechtKanzlei\LegalTextsConnector;
+namespace ITRechtKanzlei\LegalText\Plugin\Wordpress;
 
 require_once __DIR__ . '/Plugin.php';
 require_once __DIR__ . '/Document.php';

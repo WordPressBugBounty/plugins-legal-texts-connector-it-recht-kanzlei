@@ -7,16 +7,16 @@
  * Author: IT-Recht Kanzlei
  * Author URI: https://www.it-recht-kanzlei.de/
  * Text Domain: legal-texts-connector-it-recht-kanzlei
- * Version: 1.0.11
- * Stable tag: 1.0.11
+ * Version: 1.0.13
+ * Stable tag: 1.0.13
  * Requires at least: 4.4
- * Tested up to: 6.8
+ * Tested up to: 6.9
  * Requires PHP: 7.1
  * License: GPLv3 or later
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */
 class LegalTextsConnector {
-    const VERSION = '1.0.11';
+    const VERSION = '1.0.13';
     const PLUGIN_NAME  = 'legal-texts-connector-it-recht-kanzlei';
 
     public function __construct() {
@@ -31,12 +31,12 @@ class LegalTextsConnector {
         add_action('rest_api_init', function () {
             self::includeRequirements();
             require_once(__DIR__ . '/src/RestEndpoint.php');
-            \ITRechtKanzlei\LegalTextsConnector\RestEndpoint::registerRoutes();
+            \ITRechtKanzlei\LegalText\Plugin\Wordpress\RestEndpoint::registerRoutes();
         });
 
         add_action('plugins_loaded', function () {
             $this->includeRequirements();
-            (new ITRechtKanzlei\LegalTextsConnector\Plugin())->init();
+            (new ITRechtKanzlei\LegalText\Plugin\Wordpress\Plugin())->init();
         });
 
         add_action('activated_plugin', function ($pluginFile, $network_activation) {
@@ -49,7 +49,7 @@ class LegalTextsConnector {
             }
             self::includeRequirements();
             wp_redirect(add_query_arg(
-                ['page' => ITRechtKanzlei\LegalTextsConnector\SettingsPage::PAGE_SETTINGS],
+                ['page' => ITRechtKanzlei\LegalText\Plugin\Wordpress\SettingsPage::PAGE_SETTINGS],
                 admin_url('options-general.php')
             ));
             exit();
@@ -71,7 +71,7 @@ class LegalTextsConnector {
     }
 
     private function includeRequirements() {
-        if (class_exists(ITRechtKanzlei\LegalTextsConnector\Plugin::class)) {
+        if (class_exists(ITRechtKanzlei\LegalText\Plugin\Wordpress\Plugin::class)) {
             return;
         }
         require_once(__DIR__ . '/src/Document.php');

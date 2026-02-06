@@ -1,5 +1,5 @@
 <?php
-namespace ITRechtKanzlei\LegalTextsConnector;
+namespace ITRechtKanzlei\LegalText\Plugin\Wordpress;
 
 class RestEndpoint {
 
@@ -24,7 +24,7 @@ class RestEndpoint {
         });
 
         $itrkLtiHandler = new ItrkLtiHandler();
-        $lti = new \ITRechtKanzlei\LTI(
+        $lti = new \ITRechtKanzlei\LegalText\Sdk\LTI(
             $itrkLtiHandler,
             self::getTargetSystemVersion(),
             \LegalTextsConnector::VERSION
@@ -54,13 +54,13 @@ class RestEndpoint {
         );
 
         add_filter('rest_pre_serve_request', function ($served, $result, $request, $server) {
-            $resonseData = $result->get_data();
-            if ($resonseData instanceof \ITRechtKanzlei\LTIResult) {
+            $responseData = $result->get_data();
+            if ($responseData instanceof \ITRechtKanzlei\LegalText\Sdk\LTIResult) {
                 $server->send_header('Content-Type', 'application/xml; charset=utf-8');
-                // Helper to return a XML instead of a JSON response for the REST-API endpoint.
-                // $resonseData contains a SimpleXML object that is converted to string.
-                // Therefore the data is sanitized already.
-                echo $resonseData; // @Review Team: No escaping. See comment above.
+                // Helper to return an XML instead of a JSON response for the REST-API endpoint.
+                // $responseData contains a SimpleXML object that is converted to string.
+                // Therefore, the data is sanitized already.
+                echo $responseData; // @Review Team: No escaping. See comment above.
                 return true;
             }
             return $served;

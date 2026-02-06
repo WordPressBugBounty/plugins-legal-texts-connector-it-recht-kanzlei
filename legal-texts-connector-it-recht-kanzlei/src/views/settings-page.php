@@ -1,7 +1,7 @@
 <?php
-use ITRechtKanzlei\LegalTextsConnector\Plugin;
-use ITRechtKanzlei\LegalTextsConnector\SettingsPage;
-use ITRechtKanzlei\LegalTextsConnector\ShortCodes;
+use ITRechtKanzlei\LegalText\Plugin\Wordpress\Plugin;
+use ITRechtKanzlei\LegalText\Plugin\Wordpress\SettingsPage;
+use ITRechtKanzlei\LegalText\Plugin\Wordpress\ShortCodes;
 
 if (!defined('ABSPATH')) exit;
 

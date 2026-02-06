@@ -1,5 +1,5 @@
 <?php
-namespace ITRechtKanzlei\LegalTextsConnector;
+namespace ITRechtKanzlei\LegalText\Plugin\Wordpress;
 
 require_once __DIR__ . '/sdk/LTI.php';
 require_once __DIR__ . '/sdk/LTIPushData.php';
@@ -71,6 +71,15 @@ class Plugin {
         }
     }
 
+    /** @return string */
+    public static function getAuthToken() {
+        if (defined('ITRK_LTI_AUTH_TOKEN') && !empty(ITRK_LTI_AUTH_TOKEN) && is_string(ITRK_LTI_AUTH_TOKEN)) {
+            return ITRK_LTI_AUTH_TOKEN;
+        }
+        $token = get_option(self::OPTION_USER_AUTH_TOKEN, '');
+        return !empty($token) && is_string($token) ? $token : '';
+    }
+
     /** @return ?string */
     public static function getTrinityBrand() {
         static $trinityBrand = false;
@@ -83,7 +92,7 @@ class Plugin {
 
     public static function getAvailableDocuments($type = null) {
         global $wpdb;
-        if (!in_array($type, \ITRechtKanzlei\LTIPushData::ALLOWED_DOCUMENT_TYPES)) {
+        if (!in_array($type, \ITRechtKanzlei\LegalText\Sdk\LTIPushData::ALLOWED_DOCUMENT_TYPES)) {
             return [];
         }
         $result = $wpdb->get_col($wpdb->prepare(
@@ -169,8 +178,7 @@ class Plugin {
     public static function isSetup() {
         static $isSetup = null;
         if ($isSetup === null) {
-            $isSetup = ($token = get_option(self::OPTION_USER_AUTH_TOKEN))
-                && is_string($token)
+            $isSetup = ($token = self::getAuthToken())
                 && !empty($token)
                 && ((int)get_option(self::OPTION_INTERFACE_ID) > 0)
             ;

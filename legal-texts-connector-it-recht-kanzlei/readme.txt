@@ -2,9 +2,9 @@
 Contributors: itrechtkanzlei
 Tags: Rechtstexte, AGB, Impressum, Datenschutz, abmahnsicher
 Requires at least: 4.4
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.1
-Stable tag: 1.0.11
+Stable tag: 1.0.13
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -69,6 +69,13 @@ For orders placed in a WooCommerce shop, the necessary legal texts are automatic
 
 
 == Changelog ==
+= Version 1.0.13 =
+* Restored backward compatibility with the older version of the plugin
+
+= Version 1.0.12 =
+* Internal restructuring
+* Tested with WP 6.9
+
 = Version 1.0.11 =
 * No longer load legal texts per autoload option
 * Bugfix for loading the file system layer

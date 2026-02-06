@@ -1,5 +1,5 @@
 <?php
-use ITRechtKanzlei\LegalTextsConnector\Plugin;
+use ITRechtKanzlei\LegalText\Plugin\Wordpress\Plugin;
 
 if (!defined('ABSPATH')) exit;
 ?>

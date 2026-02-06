@@ -1,5 +1,5 @@
 <?php
-namespace ITRechtKanzlei\LegalTextsConnector;
+namespace ITRechtKanzlei\LegalText\Plugin\Wordpress;
 
 require_once __DIR__ . '/Helper.php';
 require_once __DIR__ . '/Message.php';
@@ -65,11 +65,11 @@ class SettingsPage {
             return;
         }
 
-        if (empty(get_option(Plugin::OPTION_USER_AUTH_TOKEN))) {
+        if (empty(Plugin::getAuthToken())) {
             require_once __DIR__ . '/sdk/require_all.php';
             update_option(
                 Plugin::OPTION_USER_AUTH_TOKEN,
-                \ITRechtKanzlei\LTI::generateToken(),
+                \ITRechtKanzlei\LegalText\Sdk\LTI::generateToken(),
                 false
             );
         }
@@ -80,7 +80,7 @@ class SettingsPage {
             // even ones considered harmful like "Robert'); DROP TABLE Students; --" (https://xkcd.com/327/)
             // The password is sent to an external service and validated there.
             'password' => isset($_POST['itrk-password']) ? wp_unslash($_POST['itrk-password']) : '', // @Review Team: See comment above.
-            'token'    => get_option(Plugin::OPTION_USER_AUTH_TOKEN),
+            'token'    => Plugin::getAuthToken(),
             'apiUrl'   => home_url(),
             'sid'      => isset($_POST['itrk-sid']) ? (int)$_POST['itrk-sid'] : '',
         ];

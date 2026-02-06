@@ -1,17 +1,20 @@
 <?php
-namespace ITRechtKanzlei\LegalTextsConnector;
+namespace ITRechtKanzlei\LegalText\Plugin\Wordpress;
+
+use ITRechtKanzlei\LegalText\Sdk;
+
 require_once __DIR__ . '/sdk/require_all.php';
 require_once __DIR__ . '/ShortCodes.php';
 require_once __DIR__ . '/Helper.php';
 
-class ItrkLtiHandler extends \ITRechtKanzlei\LTIHandler {
+class ItrkLtiHandler extends Sdk\LTIHandler {
 
     public function isTokenValid(string $token): bool {
-        return !empty($token) && ($token === get_option(Plugin::OPTION_USER_AUTH_TOKEN, ''));
+        return !empty($token) && ($token === Plugin::getAuthToken());
     }
 
-    public function handleActionGetVersion(): \ITRechtKanzlei\LTIVersionResult {
-        $result = new \ITRechtKanzlei\LTIVersionResult();
+    public function handleActionGetVersion(): Sdk\LTIVersionResult {
+        $result = new Sdk\LTIVersionResult();
 
         $result->includeApacheModules(true);
 
@@ -27,10 +30,10 @@ class ItrkLtiHandler extends \ITRechtKanzlei\LTIHandler {
         return $result;
     }
 
-    public function handleActionGetAccountList(): \ITRechtKanzlei\LTIAccountListResult {
+    public function handleActionGetAccountList(): Sdk\LTIAccountListResult {
         global $sitepress;
 
-        $result = new \ITRechtKanzlei\LTIAccountListResult();
+        $result = new Sdk\LTIAccountListResult();
         $languages = [];
 
         // WPML
@@ -51,7 +54,7 @@ class ItrkLtiHandler extends \ITRechtKanzlei\LTIHandler {
         return $result;
     }
 
-    public function handleActionPush(\ITRechtKanzlei\LTIPushData $data): \ITRechtKanzlei\LTIPushResult {
+    public function handleActionPush(Sdk\LTIPushData $data): Sdk\LTIPushResult {
         global $wpdb;
 
         $document = new Document(
@@ -74,9 +77,9 @@ class ItrkLtiHandler extends \ITRechtKanzlei\LTIHandler {
         // If the function returns false an error occurred.
         $lastDbError = $wpdb->last_error;
         if (!update_option($document->getIdentifier(), $document, false)) {
-            $error = new \ITRechtKanzlei\LTIError(
+            $error = new Sdk\LTIError(
                 __('The legal text could not be stored in the database.', 'legal-texts-connector-it-recht-kanzlei'),
-                \ITRechtKanzlei\LTIError::SAVE_DOCUMENT_ERROR
+                Sdk\LTIError::SAVE_DOCUMENT_ERROR
             );
             if ($lastDbError !== $wpdb->last_error) {
                 $error->addContext(['wpdb-error' => $wpdb->last_error]);
@@ -96,26 +99,26 @@ class ItrkLtiHandler extends \ITRechtKanzlei\LTIHandler {
                 $docLocation = dirname($filePath);
 
                 if (!$fs->is_dir($docLocation) && !$fs->mkdir($docLocation)) {
-                    throw new \ITRechtKanzlei\LTIError(
+                    throw new Sdk\LTIError(
                         __(
                             'Unable to create the directory for storing the pdf documents.',
                             'legal-texts-connector-it-recht-kanzlei'
                         ),
-                        \ITRechtKanzlei\LTIError::SAVE_PDF_ERROR
+                        Sdk\LTIError::SAVE_PDF_ERROR
                     );
                 }
                 if (!$fs->put_contents($filePath, $data->getPdf())) {
-                    throw new \ITRechtKanzlei\LTIError(
+                    throw new Sdk\LTIError(
                         __('The file could not be written.', 'legal-texts-connector-it-recht-kanzlei'),
-                        \ITRechtKanzlei\LTIError::SAVE_PDF_ERROR
+                        Sdk\LTIError::SAVE_PDF_ERROR
                     );
                 }
             } catch (\Exception $e) {
-                throw new \ITRechtKanzlei\LTIError(
+                throw new Sdk\LTIError(
                     __('The pdf document could not be saved.', 'legal-texts-connector-it-recht-kanzlei')
                         // translators: %s will be replaced with an error message.
                         .' '.sprintf(__('Reason: %s', 'legal-texts-connector-it-recht-kanzlei'), $e->getMessage()),
-                    \ITRechtKanzlei\LTIError::SAVE_PDF_ERROR,
+                    Sdk\LTIError::SAVE_PDF_ERROR,
                     $e
                 );
             }
@@ -126,7 +129,7 @@ class ItrkLtiHandler extends \ITRechtKanzlei\LTIHandler {
         if ($postId > 0) {
             $targetUrl = (string)get_permalink($postId);
 
-            // Trigger a post update for other plugins (eg, cache plugins, WooCommerce_Germanized_Pro, ...)
+            // Trigger a post-update event for other plugins (e.g., cache plugins, WooCommerce_Germanized_Pro, ...)
             wp_update_post([
                 'ID'            => $postId,
                 'post_date'     => date('Y-m-d H:i:s'),
@@ -146,6 +149,6 @@ class ItrkLtiHandler extends \ITRechtKanzlei\LTIHandler {
             }
         }
 
-        return new \ITRechtKanzlei\LTIPushResult($targetUrl);
+        return new Sdk\LTIPushResult($targetUrl);
     }
 }
