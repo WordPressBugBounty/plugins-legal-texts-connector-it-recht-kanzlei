@@ -64,6 +64,7 @@ class ItrkLtiHandler extends Sdk\LTIHandler {
             $data->getTextHtml(),
             $data->getType(),
             $data->getLocalizedFileName(),
+            $data->hasPdf() ? $data->getPdf() : '',
             new \DateTime()
         );
 

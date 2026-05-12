@@ -2,9 +2,9 @@
 Contributors: itrechtkanzlei
 Tags: Rechtstexte, AGB, Impressum, Datenschutz, abmahnsicher
 Requires at least: 4.4
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.1
-Stable tag: 1.0.13
+Stable tag: 1.0.14
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 

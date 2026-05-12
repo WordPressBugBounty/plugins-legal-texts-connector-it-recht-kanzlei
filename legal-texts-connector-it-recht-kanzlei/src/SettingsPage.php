@@ -37,12 +37,12 @@ class SettingsPage {
 
     public function addActionLinks($links) {
         $links[] =
-            '<a href="' . admin_url('options-general.php?page='.self::PAGE_SETTINGS) . '">' . esc_html(__(
+            '<a href="' . esc_attr(admin_url('options-general.php?page='.self::PAGE_SETTINGS)) . '">' . esc_html(__(
                 'Settings',
                 'legal-texts-connector-it-recht-kanzlei'
             )) . '</a>';
         $links[] =
-            '<a href="' . admin_url('options-general.php?page='.self::PAGE_SETTINGS.'&'.\LegalTextsConnector::PLUGIN_NAME.'-reset=true') . '" style="color:#900">' . esc_html(__(
+            '<a href="' . esc_attr(Plugin::getResetActionUrl()) . '" style="color:#900">' . esc_html(__(
                 'Reset Settings',
                 'legal-texts-connector-it-recht-kanzlei'
             )) . '</a>';

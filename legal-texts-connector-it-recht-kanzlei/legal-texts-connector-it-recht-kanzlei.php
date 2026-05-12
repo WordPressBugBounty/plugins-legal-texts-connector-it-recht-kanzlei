@@ -7,16 +7,16 @@
  * Author: IT-Recht Kanzlei
  * Author URI: https://www.it-recht-kanzlei.de/
  * Text Domain: legal-texts-connector-it-recht-kanzlei
- * Version: 1.0.13
- * Stable tag: 1.0.13
+ * Version: 1.0.14
+ * Stable tag: 1.0.14
  * Requires at least: 4.4
- * Tested up to: 6.9
+ * Tested up to: 7.0
  * Requires PHP: 7.1
  * License: GPLv3 or later
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */
 class LegalTextsConnector {
-    const VERSION = '1.0.13';
+    const VERSION = '1.0.14';
     const PLUGIN_NAME  = 'legal-texts-connector-it-recht-kanzlei';
 
     public function __construct() {

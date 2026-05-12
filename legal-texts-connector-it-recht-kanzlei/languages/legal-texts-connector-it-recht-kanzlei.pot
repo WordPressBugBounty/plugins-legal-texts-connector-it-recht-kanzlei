@@ -1,17 +1,17 @@
-# Copyright (C) 2025 IT-Recht Kanzlei
+# Copyright (C) 2026 IT-Recht Kanzlei
 # This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Legal Text Connector of the IT-Recht Kanzlei 1.0.11-b3\n"
+"Project-Id-Version: Legal Text Connector of the IT-Recht Kanzlei 1.0.14\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/legal-texts-connector-it-recht-kanzlei\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-03-12T15:53:05+01:00\n"
+"POT-Creation-Date: 2026-04-06T21:35:08+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.11.0\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: legal-texts-connector-it-recht-kanzlei\n"
 
 #. Plugin Name of the plugin
@@ -45,179 +45,181 @@ msgstr ""
 
 #. translators: %2$s will be replaced with a list of error messages.
 #: src/Helper.php:38
+#, php-format
 msgid "WP_Filesystem (%1$s) encountered errors during the initialization: %2$s"
 msgstr ""
 
-#: src/ItrkLtiHandler.php:78
+#: src/ItrkLtiHandler.php:82
 msgid "The legal text could not be stored in the database."
 msgstr ""
 
-#: src/ItrkLtiHandler.php:100
+#: src/ItrkLtiHandler.php:104
 msgid "Unable to create the directory for storing the pdf documents."
 msgstr ""
 
-#: src/ItrkLtiHandler.php:109
+#: src/ItrkLtiHandler.php:113
 msgid "The file could not be written."
 msgstr ""
 
-#: src/ItrkLtiHandler.php:115
+#: src/ItrkLtiHandler.php:119
 msgid "The pdf document could not be saved."
 msgstr ""
 
 #. translators: %s will be replaced with an error message.
-#: src/ItrkLtiHandler.php:117
+#: src/ItrkLtiHandler.php:121
+#, php-format
 msgid "Reason: %s"
 msgstr ""
 
-#: src/Plugin.php:102
+#: src/Plugin.php:111
 msgid "German"
 msgstr ""
 
-#: src/Plugin.php:103
+#: src/Plugin.php:112
 msgid "French"
 msgstr ""
 
-#: src/Plugin.php:104
+#: src/Plugin.php:113
 msgid "English"
 msgstr ""
 
-#: src/Plugin.php:105
+#: src/Plugin.php:114
 msgid "Spanish"
 msgstr ""
 
-#: src/Plugin.php:106
+#: src/Plugin.php:115
 msgid "Italian"
 msgstr ""
 
-#: src/Plugin.php:107
+#: src/Plugin.php:116
 msgid "Dutch"
 msgstr ""
 
-#: src/Plugin.php:108
+#: src/Plugin.php:117
 msgid "Polish"
 msgstr ""
 
-#: src/Plugin.php:109
+#: src/Plugin.php:118
 msgid "Swedish"
 msgstr ""
 
-#: src/Plugin.php:110
+#: src/Plugin.php:119
 msgid "Danish"
 msgstr ""
 
-#: src/Plugin.php:111
+#: src/Plugin.php:120
 msgid "Czech"
 msgstr ""
 
-#: src/Plugin.php:112
+#: src/Plugin.php:121
 msgid "Slovenian"
 msgstr ""
 
-#: src/Plugin.php:113
+#: src/Plugin.php:122
 msgid "Portuguese"
 msgstr ""
 
-#: src/Plugin.php:114
+#: src/Plugin.php:123
 msgid "Norwegian"
 msgstr ""
 
-#: src/Plugin.php:115
+#: src/Plugin.php:124
 msgid "Turkish"
 msgstr ""
 
-#: src/Plugin.php:126
+#: src/Plugin.php:135
 msgid "Germany"
 msgstr ""
 
-#: src/Plugin.php:127
+#: src/Plugin.php:136
 msgid "Austria"
 msgstr ""
 
-#: src/Plugin.php:128
+#: src/Plugin.php:137
 msgid "Switzerland"
 msgstr ""
 
-#: src/Plugin.php:129
+#: src/Plugin.php:138
 msgid "Sweden"
 msgstr ""
 
-#: src/Plugin.php:130
+#: src/Plugin.php:139
 msgid "Spain"
 msgstr ""
 
-#: src/Plugin.php:131
+#: src/Plugin.php:140
 msgid "Italy"
 msgstr ""
 
-#: src/Plugin.php:132
+#: src/Plugin.php:141
 msgid "Poland"
 msgstr ""
 
-#: src/Plugin.php:133
+#: src/Plugin.php:142
 msgid "England"
 msgstr ""
 
-#: src/Plugin.php:134
+#: src/Plugin.php:143
 msgid "France"
 msgstr ""
 
-#: src/Plugin.php:135
+#: src/Plugin.php:144
 msgid "Belgium"
 msgstr ""
 
-#: src/Plugin.php:136
+#: src/Plugin.php:145
 msgid "Netherlands"
 msgstr ""
 
-#: src/Plugin.php:137
+#: src/Plugin.php:146
 msgid "USA"
 msgstr ""
 
-#: src/Plugin.php:138
+#: src/Plugin.php:147
 msgid "Canada"
 msgstr ""
 
-#: src/Plugin.php:139
+#: src/Plugin.php:148
 msgid "Ireland"
 msgstr ""
 
-#: src/Plugin.php:140
+#: src/Plugin.php:149
 msgid "Czech Republic"
 msgstr ""
 
-#: src/Plugin.php:141
+#: src/Plugin.php:150
 msgid "Denmark"
 msgstr ""
 
-#: src/Plugin.php:142
+#: src/Plugin.php:151
 msgid "Luxembourg"
 msgstr ""
 
-#: src/Plugin.php:143
+#: src/Plugin.php:152
 msgid "Slovenia"
 msgstr ""
 
-#: src/Plugin.php:144
+#: src/Plugin.php:153
 msgid "Australia"
 msgstr ""
 
-#: src/Plugin.php:145
+#: src/Plugin.php:154
 msgid "Portugal"
 msgstr ""
 
-#: src/Plugin.php:157
+#: src/Plugin.php:166
 msgid "Terms and Conditions"
 msgstr ""
 
-#: src/Plugin.php:158
+#: src/Plugin.php:167
 msgid "Privacy"
 msgstr ""
 
-#: src/Plugin.php:159
+#: src/Plugin.php:168
 msgid "Refund Policy"
 msgstr ""
 
-#: src/Plugin.php:160
+#: src/Plugin.php:169
 msgid "Imprint"
 msgstr ""
 
@@ -233,32 +235,33 @@ msgstr ""
 msgid "Reset Settings"
 msgstr ""
 
-#: src/SettingsPage.php:157
+#: src/SettingsPage.php:160
 msgid "An unknown error occurred."
 msgstr ""
 
-#: src/SettingsPage.php:158
+#: src/SettingsPage.php:161
 msgid "A connection to the server of IT-Recht Kanzlei could not be established. Error Details:"
 msgstr ""
 
-#: src/SettingsPage.php:159
+#: src/SettingsPage.php:162
 msgid "Your provided credentials are incomplete."
 msgstr ""
 
-#: src/SettingsPage.php:160
+#: src/SettingsPage.php:163
 msgid "Your provided credentials are invalid."
 msgstr ""
 
-#: src/SettingsPage.php:161
+#: src/SettingsPage.php:164
 msgid "You do not have any imprints configured. Please log into the Client Portal of IT-Recht Kanzlei."
 msgstr ""
 
-#: src/SettingsPage.php:162
+#: src/SettingsPage.php:165
 msgid "The selected imprint is not active anymore. Please reload the page and repeat the process."
 msgstr ""
 
 #. translators: %4$s will be replaced with the language name the document is for.
-#: src/SettingsPage.php:205
+#: src/SettingsPage.php:208
+#, php-format
 msgid "The document %1$s \"%2$s\" for the country %3$s in the language %4$s has been deleted."
 msgstr ""
 
@@ -272,6 +275,7 @@ msgstr ""
 
 #. translators: %s will be replaced with the short code name.
 #: src/ShortCodes.php:115
+#, php-format
 msgid "No content found for %s. Please transfer the legal texts again."
 msgstr ""
 
@@ -333,6 +337,7 @@ msgstr ""
 
 #. translators: Keep the [link][/link] tag intact. %1$s is a list of legal texts.
 #: src/views/settings-header.php:42
+#, php-format
 msgid "You have stored manually generated PDF files for some legal texts (%1$s) in the [link]Germanized > Emails > PDF Attachments[/link] settings. Please remember to check these regularly to ensure they are up to date."
 msgstr ""
 
@@ -414,6 +419,7 @@ msgstr ""
 
 #. translators: %d will be replaced with the number of seconds
 #: src/views/settings-page.php:88
+#, php-format
 msgid "%d seconds ago"
 msgstr ""
 
@@ -423,6 +429,7 @@ msgstr ""
 
 #. translators: %d will be replaced with the number of seconds
 #: src/views/settings-page.php:93
+#, php-format
 msgid "%d minutes ago"
 msgstr ""
 

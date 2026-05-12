@@ -138,7 +138,9 @@ class MailAttachmentHandler {
         try {
             $rfc = new \ReflectionClass($phpmailer);
             $propAttachment = $rfc->getProperty('attachment');
-            $propAttachment->setAccessible(true);
+            if (PHP_VERSION_ID < 80100) {
+                $propAttachment->setAccessible(true);
+            }
             $propAttachment->setValue($phpmailer, $attachments);
         } catch (\Exception $e) {}
     }

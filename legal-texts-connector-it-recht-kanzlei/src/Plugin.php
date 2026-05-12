@@ -15,20 +15,23 @@ class Plugin {
     const BACKEND_URL = ITRK_SERVICE_URL;
     const TARGET_PAGE = '/Portal/schnittstelle_ansicht.php?iid=%d';
 
-    public function init() {
+    const PLUGIN_RESET_ACTION = 'itrk_lti_action_reset';
+
+    public function init(): void {
         $pluginIsOpen = is_admin()
             && isset($_GET['page']) && ($_GET['page'] === SettingsPage::PAGE_SETTINGS);
 
         // Reset all settings.
-        if ($pluginIsOpen
-            && isset($_GET[\LegalTextsConnector::PLUGIN_NAME.'-reset']) && ($_GET[\LegalTextsConnector::PLUGIN_NAME.'-reset'] === 'true')
-        ) {
-            self::cleanPluginConfigs();
-            $url = add_query_arg(['page' => SettingsPage::PAGE_SETTINGS], admin_url('options-general.php'));
-            if (wp_redirect($url)) {
+        add_action('admin_post_'.self::PLUGIN_RESET_ACTION, function () {
+            $redirectUrl = add_query_arg(['page' => SettingsPage::PAGE_SETTINGS], admin_url('options-general.php'));
+            if (!wp_verify_nonce($_GET['_wpnonce'], self::PLUGIN_RESET_ACTION)) {
+                wp_redirect($redirectUrl);
                 exit;
             }
-        }
+            self::cleanPluginConfigs();
+            wp_redirect($redirectUrl);
+            exit;
+        });
 
         if (self::isSetup()) {
             require_once __DIR__ . '/MailAttachmentHandler.php';
@@ -36,7 +39,7 @@ class Plugin {
             new ShortCodes();
         }
 
-        if (!is_admin()) {
+        if (!is_admin() && !current_user_can('edit_pages')) {
             return;
         }
 
@@ -71,8 +74,7 @@ class Plugin {
         }
     }
 
-    /** @return string */
-    public static function getAuthToken() {
+    public static function getAuthToken(): string {
         if (defined('ITRK_LTI_AUTH_TOKEN') && !empty(ITRK_LTI_AUTH_TOKEN) && is_string(ITRK_LTI_AUTH_TOKEN)) {
             return ITRK_LTI_AUTH_TOKEN;
         }
@@ -80,8 +82,7 @@ class Plugin {
         return !empty($token) && is_string($token) ? $token : '';
     }
 
-    /** @return ?string */
-    public static function getTrinityBrand() {
+    public static function getTrinityBrand(): ?string {
         static $trinityBrand = false;
         if ($trinityBrand === false) {
             $brand = apply_filters('trinity_itrk_brand', null);
@@ -90,7 +91,7 @@ class Plugin {
         return $trinityBrand;
     }
 
-    public static function getAvailableDocuments($type = null) {
+    public static function getAvailableDocuments($type = null): array {
         global $wpdb;
         if (!in_array($type, \ITRechtKanzlei\LegalText\Sdk\LTIPushData::ALLOWED_DOCUMENT_TYPES)) {
             return [];
@@ -106,7 +107,7 @@ class Plugin {
         return $r;
     }
 
-    public static function getSupportedLanguages() {
+    public static function getSupportedLanguages(): array {
         return [
             'de' => __('German',     'legal-texts-connector-it-recht-kanzlei'),
             'fr' => __('French',     'legal-texts-connector-it-recht-kanzlei'),
@@ -130,7 +131,7 @@ class Plugin {
         return $l[$iso] ?? $iso;
     }
 
-    public static function getSupportedCountries() {
+    public static function getSupportedCountries(): array {
         return [
             'DE' => __('Germany',        'legal-texts-connector-it-recht-kanzlei'),
             'AT' => __('Austria',        'legal-texts-connector-it-recht-kanzlei'),
@@ -175,7 +176,7 @@ class Plugin {
         return $t[$type] ?? $type;
     }
 
-    public static function isSetup() {
+    public static function isSetup(): bool {
         static $isSetup = null;
         if ($isSetup === null) {
             $isSetup = ($token = self::getAuthToken())
@@ -186,7 +187,16 @@ class Plugin {
         return $isSetup;
     }
 
-    public static function cleanPluginConfigs() {
+    public static function getResetActionUrl(): string {
+        //wp_nonce_url( $bare_url, 'trash-post_'.$post->ID );
+        //admin_url('options-general.php?page='.SettingsPage::PAGE_SETTINGS.'&'.\LegalTextsConnector::PLUGIN_NAME.'-reset=true')
+        return wp_nonce_url(
+            admin_url('admin-post.php?action='.self::PLUGIN_RESET_ACTION),
+            self::PLUGIN_RESET_ACTION
+        );
+    }
+
+    public static function cleanPluginConfigs(): void {
         global $wpdb;
         $wpdb->query($wpdb->prepare(
             "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s",

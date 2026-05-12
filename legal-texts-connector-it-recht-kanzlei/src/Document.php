@@ -3,22 +3,26 @@ namespace ITRechtKanzlei\LegalText\Plugin\Wordpress;
 
 class Document
 {
-    private $title = null;
-    private $country = null;
-    private $language = null;
-    private $content = null;
-    private $type = null;
-    private $fileName = null;
-    private $creationDate = null;
+    private $title = '';
+    private $country = '';
+    private $language = '';
+    private $content = '';
+    private $contentHash = '';
+    private $type = '';
+    private $fileName = '';
+    private $pdfContent = '';
+    private $creationDate;
 
-    public function __construct($title, $country, $language, $content, $type, $fileName, $creationDate)
-    {
+    public function __construct(
+        $title, $country, $language, $content, $type, $fileName, $pdfContent, $creationDate
+    ) {
         $this->title = $title;
         $this->country = $country;
         $this->language = $language;
         $this->content = $content;
         $this->type = $type;
         $this->fileName = $fileName;
+        $this->pdfContent = $pdfContent;
         $this->creationDate = $creationDate;
     }
 
@@ -72,6 +76,18 @@ class Document
         return $this->creationDate;
     }
 
+    public function getContentHash(): string
+    {
+        if (empty($this->contentHash)) {
+            $content = $this->content;
+            if (($pos = strpos($content, '<div id="itkanzlei_txt_copyright')) > 0) {
+                $content = substr($content, 0, $pos);
+            }
+            $this->contentHash = hash('sha256', $content, false);
+        }
+        return $this->contentHash;
+    }
+
     public function getIdentifier(): string
     {
         return self::createIdentifier($this->type, $this->language, $this->country);
@@ -96,6 +112,16 @@ class Document
     public function getFile(): string
     {
         return self::getFilePath($this->getLanguage(), $this->getCountry(), $this->getType());
+    }
+
+    public function getPdfContent(): string
+    {
+        return $this->pdfContent;
+    }
+
+    public function hasPdf(): bool
+    {
+        return !empty($this->pdfContent);
     }
 
     public function getShortCode(): string
